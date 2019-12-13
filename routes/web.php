@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::domain('fakebank.test')->group(function(){
+    Route::get('/', function () {
+        return view('bank.index');
+    });
+});
+
+Route::domain('admin.fakebank.test')->group(function(){
+    Auth::routes();
+
+    Route::group(['prefix' => 'bank'], function(){
+        Route::get('/', 'BankController@index')->name('bank.index');
+    });
+
+    Route::get('/home', 'HomeController@index')->name('admin.home');
 });
