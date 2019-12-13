@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +16,20 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jgrowl.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('open-iconic/font/css/open-iconic-bootstrap.css') }}" rel="stylesheet">
+
+    <style>
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ccc;
+        }
+
+    </style>
 </head>
 <body>
     <div id="app">
@@ -77,6 +89,28 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="footer fixed-bottom">
+            <div class="container">
+                <div class="float-left">
+            <span class="text-muted">
+                <a class="badge badge-light" href="fakebank.co" target="_blank">Documentation</a>
+            </span>
+                </div>
+                <div class="float-right">
+            <span class="text-muted">
+                <a class="badge badge-light" href="https://github.com/ryangurn/fakebank" target="_blank">Repo</a>
+            </span>
+                </div>
+            </div>
+        </footer>
     </div>
+
+    <script type="text/javascript" src="{{ asset('js/jquery.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/popper.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jgrowl.min.js')  }}"></script>
+
+    @include('layouts.partials.jgrowl')
 </body>
 </html>

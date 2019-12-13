@@ -5,7 +5,13 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Banks</div>
+                    <div class="card-header">
+                        <div class="float-left">Banks</div>
+
+                        <div class="float-right">
+                            <a href="{{ route('bank.create') }}" class="oi oi-plus" data-toggle="tooltip" title="Create Bank"></a>
+                        </div>
+                    </div>
 
                     <div class="card-body">
                         <table class="table table-condensed">
@@ -18,15 +24,18 @@
                             </thead>
                             <tbody>
                             @if(!$banks->isEmpty())
+                                @foreach($banks as $bank)
                                 <tr>
-                                    <td>{{ $banks->name  }}</td>
-                                    <td>{{ $banks->caption  }}</td>
+                                    <td>{{ $bank->name  }}</td>
+                                    <td>{{ $bank->caption  }}</td>
                                     <td>{{ __('Not Configured') }}</td>
                                 </tr>
-                            @endif
+                                @endforeach
+                            @else
                                 <tr>
                                     <td colspan="3">{{ __('None Configured') }}</td>
                                 </tr>
+                            @endif
                             </tbody>
                         </table>
                     </div>
