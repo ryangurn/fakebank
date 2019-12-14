@@ -22,6 +22,9 @@ Route::domain('admin.fakebank.test')->group(function(){
 
     Route::group(['prefix' => 'bank'], function(){
         Route::get('/', 'BankController@index')->name('bank.index');
+        Route::get('/create', 'BankController@create')->name('bank.create');
+        Route::post('/', 'BankController@store')->name('bank.store');
+        Route::get('/{bank}', 'BankController@show')->name('bank.show');
     });
 
     Route::get('/home', 'HomeController@index')->name('admin.home');

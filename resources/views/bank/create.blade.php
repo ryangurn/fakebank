@@ -9,7 +9,7 @@
                         <div class="float-left">Create Bank</div>
 
                         <div class="float-right">
-                            <a href="{{ route('bank.create') }}" class="oi oi-plus" data-toggle="tooltip" title="Create Bank"></a>
+                            <a href="{{ route('bank.index') }}" class="oi oi-arrow-left" data-toggle="tooltip" title="Back"></a>
                         </div>
                     </div>
 

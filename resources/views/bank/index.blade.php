@@ -20,6 +20,7 @@
                                     <th>{{ __('Name') }}</th>
                                     <th>{{ __('Caption') }}</th>
                                     <th>{{ __('Active')  }}</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,7 +29,12 @@
                                 <tr>
                                     <td>{{ $bank->name  }}</td>
                                     <td>{{ $bank->caption  }}</td>
-                                    <td>{{ __('Not Configured') }}</td>
+                                    <td></td>
+                                    <td>
+                                        <a href="{{ route('bank.show', $bank->id) }}" class="oi oi-menu" data-toggle="tooltip" title="Show Bank: {{ $bank->name }}"></a>
+                                        <a href="{{ route('bank.show', $bank->id) }}" class="oi oi-info" data-toggle="tooltip" title="Edit Bank: {{ $bank->name }}"></a>
+
+                                    </td>
                                 </tr>
                                 @endforeach
                             @else
