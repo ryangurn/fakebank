@@ -7,6 +7,25 @@ use Illuminate\Http\Request;
 
 class BankController extends Controller
 {
+    protected $validator = [
+        'name' => 'required|min:2|max:255|string',
+        'caption' => 'required|min:2|max:255|string',
+        'trolls' => 'nullable|json'
+    ];
+
+    protected $messages = [
+        'name.required' => 'A bank name is required',
+        'name.min' => 'A bank\'s name must be more than 2 characters',
+        'name.max' => 'A bank\'s name must be less than 255 characters',
+        'name.string' => 'Why are you sending the wrong data type for the name? This must be a string!',
+        'caption.required' => 'A bank caption is required',
+        'caption.min' => 'A bank\'s caption must be more than 2 characters',
+        'caption.max' => 'A bank\'s caption must be less than 255 characters',
+        'caption.string' => 'Why are you sending the wrong data type for the caption? This must be a string!',
+        'trolls.nullable' => 'The trolls field must be nullable or a json object.',
+        'trolls.json' => 'The trolls field must be a valid json object.'
+    ];
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -48,22 +67,7 @@ class BankController extends Controller
         // i still want to ensure the admin system is completely
         // secure
 
-        $validator = validator($request->all(), [
-            'name' => 'required|min:2|max:255|string',
-            'caption' => 'required|min:2|max:255|string',
-            'trolls' => 'nullable|json'
-        ], [
-            'name.required' => 'A bank name is required',
-            'name.min' => 'A bank\'s name must be more than 2 characters',
-            'name.max' => 'A bank\'s name must be less than 255 characters',
-            'name.string' => 'Why are you sending the wrong data type for the name? This must be a string!',
-            'caption.required' => 'A bank caption is required',
-            'caption.min' => 'A bank\'s caption must be more than 2 characters',
-            'caption.max' => 'A bank\'s caption must be less than 255 characters',
-            'caption.string' => 'Why are you sending the wrong data type for the caption? This must be a string!',
-            'trolls.nullable' => 'The trolls field must be nullable or a json object.',
-            'trolls.json' => 'The trolls field must be a valid json object.'
-        ]);
+        $validator = validator($request->all(), $this->validator, $this->messages);
 
         if($validator->fails()){
             return back()->withErrors($validator);
@@ -75,7 +79,7 @@ class BankController extends Controller
         Bank::create([
             'name' => $request->get('name'),
             'caption' => $request->get('caption'),
-            'trolly' => $request->get('trolly'),
+            'trolls' => $request->get('trolls'),
             'settings' => $settings
         ]);
 
@@ -99,9 +103,10 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Bank $bank)
     {
-        //
+        $variables = ['form' => ['action' => route('bank.update', $bank->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        return view('bank.update', compact('variables', 'bank'));
     }
 
     /**
@@ -111,9 +116,20 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Bank $bank)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $bank->name = $request->get('name');
+        $bank->caption = $request->get('caption');
+        $bank->trolls = $request->get('trolls');
+        $bank->save();
+
+        return redirect()->route('bank.show', $bank->id)->with('success', 'Bank Updated!');
     }
 
     /**
@@ -122,8 +138,9 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bank $bank)
     {
-        //
+        $bank->delete();
+        return redirect()->route('bank.index')->with('success', 'Bank Deleted');
     }
 }

@@ -31,8 +31,8 @@
                                     <td>{{ $bank->caption  }}</td>
                                     <td></td>
                                     <td>
-                                        <a href="{{ route('bank.show', $bank->id) }}" class="oi oi-menu" data-toggle="tooltip" title="Show Bank: {{ $bank->name }}"></a>
-                                        <a href="{{ route('bank.show', $bank->id) }}" class="oi oi-info" data-toggle="tooltip" title="Edit Bank: {{ $bank->name }}"></a>
+                                        <a href="{{ route('bank.show', $bank->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Bank: {{ $bank->name }}">[Show]</a>
+                                        <a href="{{ route('bank.edit', $bank->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Bank: {{ $bank->name }}">[Edit]</a>
 
                                     </td>
                                 </tr>

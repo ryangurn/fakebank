@@ -28,8 +28,8 @@
                             @endif
                             @if($bank->trolls != null)
                             <div class="row">
-                                <span class="col-md-2 badge badge-warning">Troll Configurations</span>
-                                <pre class="col-md-10">{{ json_encode($bank->trolls)  }}</pre>
+                                <div class="col-md-2"><span class="badge badge-warning">Troll Configurations</span></div>
+                                <div class="col-md-10"><pre>{{ $bank->trolls  }}</pre></div>
                             </div>
                             <br />
                             @endif

@@ -25,6 +25,9 @@ Route::domain('admin.fakebank.test')->group(function(){
         Route::get('/create', 'BankController@create')->name('bank.create');
         Route::post('/', 'BankController@store')->name('bank.store');
         Route::get('/{bank}', 'BankController@show')->name('bank.show');
+        Route::get('/edit/{bank}', 'BankController@edit')->name('bank.edit');
+        Route::put('/{bank}', 'BankController@update')->name('bank.update');
+        Route::delete('/{bank}', 'BankController@destroy')->name('bank.destroy');
     });
 
     Route::get('/home', 'HomeController@index')->name('admin.home');
