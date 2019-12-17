@@ -44,10 +44,10 @@ class GenerateAccount extends Command
 
         $data = [];
         foreach($banks as $bank){
-            $data[$bank->id]['id'] = $bank->id;
+            $data[$bank->id]['bank'] = $bank->id;
             $data[$bank->id]['name'] = $bank->name;
         }
-        $headers = ['id', 'name'];
+        $headers = ['bank', 'name'];
         $this->table($headers, $data);
 
         // bank info
