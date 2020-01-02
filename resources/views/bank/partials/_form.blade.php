@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-group">
-        @if(!isset($variables['form']['hidden']) && $variables['form']['hidden'] != 'PUT')
+        @if(!isset($variables['form']['hidden']))
         <input type="submit" class="form-control btn btn-primary" value="Create" />
         @else
         <input type="submit" class="form-control btn btn-primary" value="Update" />

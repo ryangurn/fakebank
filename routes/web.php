@@ -28,6 +28,10 @@ Route::domain('admin.fakebank.test')->group(function(){
         Route::get('/edit/{bank}', 'BankController@edit')->name('bank.edit');
         Route::put('/{bank}', 'BankController@update')->name('bank.update');
         Route::delete('/{bank}', 'BankController@destroy')->name('bank.destroy');
+
+        Route::post('/status/{bank}', 'BankController@status')->name('bank.status');
+    });
+
     });
 
     Route::get('/home', 'HomeController@index')->name('admin.home');

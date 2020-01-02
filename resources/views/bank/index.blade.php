@@ -24,7 +24,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if(!$banks->isEmpty())
+                            @if(isset($banks) && !$banks->isEmpty())
                                 @foreach($banks as $bank)
                                 <tr>
                                     <td>{{ $bank->name  }}</td>
