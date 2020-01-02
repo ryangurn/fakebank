@@ -29,7 +29,7 @@
                                 <tr>
                                     <td>{{ $bank->name  }}</td>
                                     <td>{{ $bank->caption  }}</td>
-                                    <td></td>
+                                    <td>{!!  $bank->settings['status'] == true ? '<span class="badge badge-pill badge-success">Enabled</span>' : '<span class="badge badge-pill badge-danger">Disabled</span>'   !!}</td>
                                     <td>
                                         <a href="{{ route('bank.show', $bank->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Bank: {{ $bank->name }}">[Show]</a>
                                         <a href="{{ route('bank.edit', $bank->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Bank: {{ $bank->name }}">[Edit]</a>

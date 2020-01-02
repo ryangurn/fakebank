@@ -162,7 +162,26 @@ class BankController extends Controller
             return back()->withErrors($validator);
         }
 
+        if($request->get('operation') == "enable") {
+            $banks = Bank::where('id', '!=', $bank->id)->get();
+            foreach ($banks as $b) {
+                $settings = $b->settings;
+                $settings['status'] = false;
+                $b->settings = $settings;
+                $b->save();
+            }
 
+            $s = $bank->settings;
+            $s['status'] = true;
+            $bank->settings = $s;
+            $bank->save();
+        }elseif($request->get('operation') == "disable"){
+            $s = $bank->settings;
+            $s['status'] = false;
+            $bank->settings = $s;
+            $bank->save();
+        }
+        return redirect()->route('bank.show', $bank->id)->with('success', 'Bank Updated!');
     }
 
 

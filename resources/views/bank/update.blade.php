@@ -28,6 +28,37 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
+                        <div class="float-left">Change Bank Status: {{ $bank->name }}</div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <form action="{{ route('bank.status', $bank->id)  }}" method="POST">
+                            {{ csrf_field()  }}
+
+                            <div class="form-group">
+                                <select name="operation" class="form-control">
+                                    <option value="disable">Disable</option>
+                                    <option value="enable">Enable</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" class="form-control btn btn-warning" value="Change Bank Status" />
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2 mb-2"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
                         <div class="float-left">Delete Bank: {{ $bank->name }}</div>
                     </div>
 
