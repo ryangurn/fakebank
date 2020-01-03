@@ -13,7 +13,7 @@
 
 Route::domain('fakebank.test')->group(function(){
     Route::get('/', function () {
-        return view('bank.index');
+        return view('public.index');
     });
 });
 
