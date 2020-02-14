@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('account_id');
             $table->string('description');
             $table->float('amount')->default(0);
+            $table->timestamp('time');
             $table->timestamps();
             $table->softDeletes();
         });

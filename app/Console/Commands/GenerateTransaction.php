@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Account;
 use App\Bank;
 use App\Transaction;
+use Faker\Factory;
 use Illuminate\Console\Command;
 
 class GenerateTransaction extends Command
@@ -41,6 +42,7 @@ class GenerateTransaction extends Command
     public function handle()
     {
         $accounts = Account::all();
+        $faker = Factory::create();
 
         $data = [];
         foreach($accounts as $account){
@@ -60,14 +62,14 @@ class GenerateTransaction extends Command
             exit();
         }
 
-        $description = $this->ask('Description for the transaction? (provide string): ', 'APL*iTUNES.COM/BILL');
+        $description = $this->ask('Description for the transaction? (provide string): ', $faker->company);
         $descriptionValidator = validator(['description' => $description], ['description' => 'required|min:2|max:255|string']);
         if($descriptionValidator->fails()){
             $this->error("Invalid description provided");
             exit();
         }
 
-        $amount = $this->ask("Amount for the transaction? (provide float): ", 0.99);
+        $amount = $this->ask("Amount for the transaction? (provide float): ", mt_rand(25 *  pow(10, 2), 99999 * pow(10, 2)) / pow(10, 2));
         $amountValidator = validator(['amount' => $amount], ['amount' => 'required|numeric']);
         if($amountValidator->fails()){
             $this->error("Invalid amount provided");
@@ -77,7 +79,8 @@ class GenerateTransaction extends Command
         $transaction = Transaction::create([
             'account_id' => $acct,
             'description' => $description,
-            'amount' => $amount
+            'amount' => $amount,
+            'time' => $faker->dateTimeInInterval('-1 year')
         ]);
 
         $this->alert("Transaction created on account(".$transaction->account->number.") with description(".$transaction->description.") and amount(".$transaction->amount.")");
