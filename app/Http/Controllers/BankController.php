@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bank;
+use App\Transaction;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -98,7 +99,11 @@ class BankController extends Controller
      */
     public function show(Bank $bank)
     {
-        return view('bank.show', compact('bank'));
+        $transactions = $bank->accounts->map(function($i){
+            return $i->transactions;
+        })->flatten();
+
+        return view('bank.show', compact('bank', 'transactions'));
     }
 
     /**

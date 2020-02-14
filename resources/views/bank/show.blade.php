@@ -36,6 +36,37 @@
                         </p>
                     </div>
                 </div>
+
+                @if(isset($transactions) && !$transactions->isEmpty())
+                <div class="mb-4 mt-4"></div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">Transactions: {{ $bank->name }}</div>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($transactions as $transaction)
+                                <tr>
+                                    <td>{{ $transaction->account->number  }}</td>
+                                    <td>{{ $transaction->description  }}</td>
+                                    <td>{{ $transaction->amount  }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
