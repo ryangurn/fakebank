@@ -32,6 +32,10 @@ Route::domain('admin.fakebank.test')->group(function(){
         Route::post('/status/{bank}', 'BankController@status')->name('bank.status');
     });
 
+    Route::group(['prefix' => 'transaction'], function(){
+        Route::get('/', 'TransactionController@index')->name('transaction.index');
+        Route::get('/create', 'TransactionController@create')->name('transaction.create');
+        Route::post('/', 'TransactionController@store')->name('transaction.store');
     });
 
     Route::get('/home', 'HomeController@index')->name('admin.home');
