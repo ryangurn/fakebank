@@ -41,4 +41,8 @@ class Account extends Model
     public function bank(){
         return $this->hasOne(Bank::class, 'id', 'bank_id');
     }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
+    }
 }

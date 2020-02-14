@@ -34,4 +34,7 @@ class Bank extends Model
         'settings' => 'array'
     ];
 
+    public function accounts(){
+        return $this->hasMany(Account::class);
+    }
 }
