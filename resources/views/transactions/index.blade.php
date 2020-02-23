@@ -33,8 +33,8 @@
                                     <td>${{ $transaction->amount }}</td>
                                     <td>{{ date('M d,Y', $transaction->time) }}</td>
                                     <td>
-                                        <a class="badge-pill badge-primary" data-toggle="tooltip" title="Show Transaction: {{ $transaction->description }}">Show</a>
-                                        <a class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Transaction: {{ $transaction->description }}">Edit</a>
+                                        <a href="{{ route('transaction.show', $transaction->id)  }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Transaction: {{ $transaction->description }}">Show</a>
+                                        <a href="{{ route('transaction.edit', $transaction->id)  }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Transaction: {{ $transaction->description }}">Edit</a>
                                     </td>
                                 </tr>
                                 @endforeach
