@@ -36,6 +36,10 @@ Route::domain('admin.fakebank.test')->group(function(){
         Route::get('/', 'TransactionController@index')->name('transaction.index');
         Route::get('/create', 'TransactionController@create')->name('transaction.create');
         Route::post('/', 'TransactionController@store')->name('transaction.store');
+        Route::get('/{transaction}', 'TransactionController@show')->name('transaction.show');
+        Route::get('/edit/{transaction}', 'TransactionController@edit')->name('transaction.edit');
+        Route::put('/{transaction}', 'TransactionController@update')->name('transaction.update');
+        Route::delete('/{transaction}', 'TransactionController@destroy')->name('transaction.destroy');
     });
 
     Route::get('/home', 'HomeController@index')->name('admin.home');

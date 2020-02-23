@@ -77,45 +77,60 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Transaction $transaction
      * @return Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        //
+        return view('transactions.show', compact('transaction'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Transaction $transaction
      * @return Response
      */
-    public function edit($id)
+    public function edit(Transaction $transaction)
     {
-        //
+        $variables = ['form' => ['action' => route('transaction.update', $transaction->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        $accounts = Account::all();
+        return view('transactions.update', compact('transaction', 'variables', 'accounts'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param Transaction $transaction
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Transaction $transaction)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $transaction->account_id = $request->get('account_id');
+        $transaction->description = $request->get('description');
+        $transaction->amount = $request->get('amount');
+        $transaction->save();
+
+        return redirect()->route('transaction.index')->with('success', 'Transaction Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Transaction $transaction
      * @return Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        return redirect()->route('transaction.index')->with('success', 'Transaction Deleted');
     }
 }
