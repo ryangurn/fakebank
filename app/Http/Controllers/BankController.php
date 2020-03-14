@@ -39,7 +39,7 @@ class BankController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Factory|View
      */
     public function index()
     {
@@ -63,7 +63,7 @@ class BankController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -95,7 +95,7 @@ class BankController extends Controller
      * Display the specified resource.
      *
      * @param  Bank  $bank
-     * @return Response
+     * @return Factory|View
      */
     public function show(Bank $bank)
     {
@@ -110,7 +110,7 @@ class BankController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Bank $bank
-     * @return Response
+     * @return Factory|View
      */
     public function edit(Bank $bank)
     {
@@ -123,7 +123,7 @@ class BankController extends Controller
      *
      * @param Request $request
      * @param Bank $bank
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Bank $bank)
     {
@@ -145,7 +145,7 @@ class BankController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Bank $bank
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      * @throws Exception
      */
     public function destroy(Bank $bank)
@@ -157,6 +157,7 @@ class BankController extends Controller
     /**
      * @param Request $request
      * @param Bank $bank
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function status(Request $request, Bank $bank){
         $validator = validator($request->all(), [
