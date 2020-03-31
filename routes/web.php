@@ -42,5 +42,15 @@ Route::domain('admin.fakebank.test')->group(function(){
         Route::delete('/{transaction}', 'TransactionController@destroy')->name('transaction.destroy');
     });
 
+    Route::group(['prefix' => 'account'], function(){
+        Route::get('/', 'AccountController@index')->name('account.index');
+        Route::get('/create', 'AccountController@create')->name('account.create');
+        Route::post('/', 'AccountController@store')->name('account.store');
+        Route::get('/{account}', 'AccountController@show')->name('account.show');
+        Route::get('/edit/{account}', 'AccountController@edit')->name('account.edit');
+        Route::put('/{account}', 'AccountController@update')->name('account.update');
+        Route::delete('/{account}', 'AccountController@destroy')->name('account.destroy');
+    });
+
     Route::get('/home', 'HomeController@index')->name('admin.home');
 });
