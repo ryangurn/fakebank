@@ -29,10 +29,10 @@ class TransactionController extends Controller
     ];
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index()
     {
         $transactions = Transaction::where('amount', '>', '0')->orderBy('time', 'desc')->get();
@@ -41,10 +41,10 @@ class TransactionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Response
+    */
     public function create()
     {
         $variables = ['form' => ['action' => route('transaction.store'), 'method' => 'POST']];
@@ -53,11 +53,11 @@ class TransactionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param Request $request
+    * @return Response
+    */
     public function store(Request $request)
     {
         $validator = validator($request->all(), $this->validator, $this->messages);
@@ -75,22 +75,22 @@ class TransactionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Transaction $transaction
-     * @return Response
-     */
+    * Display the specified resource.
+    *
+    * @param Transaction $transaction
+    * @return Response
+    */
     public function show(Transaction $transaction)
     {
         return view('transactions.show', compact('transaction'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Transaction $transaction
-     * @return Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param Transaction $transaction
+    * @return Response
+    */
     public function edit(Transaction $transaction)
     {
         $variables = ['form' => ['action' => route('transaction.update', $transaction->id), 'method' => 'POST', 'hidden' => 'PUT']];
@@ -99,12 +99,12 @@ class TransactionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Transaction $transaction
-     * @return Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param Request $request
+    * @param Transaction $transaction
+    * @return Response
+    */
     public function update(Request $request, Transaction $transaction)
     {
         $validator = validator($request->all(), $this->validator, $this->messages);
@@ -122,12 +122,12 @@ class TransactionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param Transaction $transaction
-     * @return Response
-     * @throws \Exception
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param Transaction $transaction
+    * @return Response
+    * @throws \Exception
+    */
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();

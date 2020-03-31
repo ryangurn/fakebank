@@ -37,10 +37,10 @@ class BankController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Factory|View
-     */
+    * Display a listing of the resource.
+    *
+    * @return Factory|View
+    */
     public function index()
     {
         $banks = Bank::all();
@@ -49,10 +49,10 @@ class BankController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Factory|View
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return Factory|View
+    */
     public function create()
     {
         $variables = ['form' => ['action' => route('bank.store'), 'method' => 'POST']];
@@ -60,11 +60,11 @@ class BankController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param Request $request
+    * @return \Illuminate\Http\RedirectResponse
+    */
     public function store(Request $request)
     {
         // ensure that the submitted form fields are validated
@@ -92,11 +92,11 @@ class BankController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  Bank  $bank
-     * @return Factory|View
-     */
+    * Display the specified resource.
+    *
+    * @param  Bank  $bank
+    * @return Factory|View
+    */
     public function show(Bank $bank)
     {
         $transactions = $bank->accounts->map(function($i){
@@ -107,11 +107,11 @@ class BankController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Bank $bank
-     * @return Factory|View
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param Bank $bank
+    * @return Factory|View
+    */
     public function edit(Bank $bank)
     {
         $variables = ['form' => ['action' => route('bank.update', $bank->id), 'method' => 'POST', 'hidden' => 'PUT']];
@@ -119,12 +119,12 @@ class BankController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Bank $bank
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    * Update the specified resource in storage.
+    *
+    * @param Request $request
+    * @param Bank $bank
+    * @return \Illuminate\Http\RedirectResponse
+    */
     public function update(Request $request, Bank $bank)
     {
         $validator = validator($request->all(), $this->validator, $this->messages);
@@ -142,12 +142,12 @@ class BankController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param Bank $bank
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws Exception
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param Bank $bank
+    * @return \Illuminate\Http\RedirectResponse
+    * @throws Exception
+    */
     public function destroy(Bank $bank)
     {
         $bank->delete();
@@ -155,10 +155,10 @@ class BankController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Bank $bank
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    * @param Request $request
+    * @param Bank $bank
+    * @return \Illuminate\Http\RedirectResponse
+    */
     public function status(Request $request, Bank $bank){
         $validator = validator($request->all(), [
             'operation' => 'required|in:enable,disable'
