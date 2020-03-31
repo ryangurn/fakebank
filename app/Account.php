@@ -24,7 +24,7 @@ class Account extends Model
     ];
 
     public function getBalanceAttribute($value){
-        return money_format('%i', $value);
+        return sprintf('%01.2f', $value);
     }
 
     public function getTypeAttribute($value){
