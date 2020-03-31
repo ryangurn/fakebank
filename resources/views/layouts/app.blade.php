@@ -63,6 +63,7 @@
                         @else
 
                             <li class="nav-item @if(url()->current() == route('bank.index')) active @endif"><a class="nav-link" href="{{ route('bank.index')  }}">Banks</a></li>
+                                                        <li class="nav-item @if(url()->current() == route('account.index')) active @endif"><a class="nav-link" href="{{ route('account.index')  }}">Accounts</a></li>
                             <li class="nav-item @if(url()->current() == route('transaction.index')) active @endif"><a class="nav-link" href="{{ route('transaction.index')  }}">Transactions</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
