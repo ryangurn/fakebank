@@ -38,7 +38,7 @@
                             <input type="hidden" name="_method" value="DELETE" />
 
                             <div class="form-group">
-                                <input type="submit" class="form-control btn btn-danger" value="Delete Bank" />
+                                <input type="submit" class="form-control btn btn-danger" value="Delete Transaction" />
                             </div>
                         </form>
 
