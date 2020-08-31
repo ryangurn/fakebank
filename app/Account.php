@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use NumberFormatter;
 
 class Account extends Model
 {
@@ -24,7 +25,8 @@ class Account extends Model
     ];
 
     public function getBalanceAttribute($value){
-        return money_format('%i', $value);
+        $out = new NumberFormatter('en-US', NumberFormatter::CURRENCY);
+        return $out->formatCurrency($value, "USD");
     }
 
     public function getTypeAttribute($value){
