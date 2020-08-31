@@ -9,6 +9,26 @@ use Illuminate\Http\Response;
 
 class AccountController extends Controller
 {
+    protected $validator = [
+        'bank_id' => 'required|exists:banks,id|integer',
+        'type' => 'required|in:0,1,2|integer',
+        'number' => 'required|numeric',
+        'balance' => 'required|numeric',
+    ];
+
+    protected $messages = [
+        'bank_id.required' => 'A bank account is required',
+        'bank_id.integer' => 'A bank account is an integer',
+        'bank_id.exists' => 'The bank account must already exist',
+        'type.required' => 'The account type is required',
+        'type.in' => 'The type must be one of the following: Checking, Saving, or Credit Card',
+        'type.integer' => 'The type must be an integer',
+        'number.required' => 'A bank account number is required',
+        'number.numeric' => 'A bank account must be a numeric value',
+        'balance.required' => 'A bank account balance is required',
+        'balance.numeric' => 'A bank account balance must be numeric',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -35,12 +55,25 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return Response
      */
     public function store(Request $request)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        Account::create([
+            'bank_id' => $request->get('bank_id'),
+            'type' => $request->get('type'),
+            'number' => $request->get('number'),
+            'balance' => $request->get('balance'),
+        ]);
+
+        return redirect()->route('account.index')->with('success', 'Account was created!');
     }
 
     /**
@@ -68,7 +101,7 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
      * @return Response
      */
