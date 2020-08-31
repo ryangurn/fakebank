@@ -32,7 +32,9 @@
                                     <td>{{ $account->type  }}</td>
                                     <td>{{ $account->number  }}</td>
                                     <td>{{ $account->balance  }}</td>
-                                    <td></td>
+                                    <td>
+                                        <a href="{{ route('account.show', $account->id)  }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Account: {{ $account->number }}">Show</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             @else
