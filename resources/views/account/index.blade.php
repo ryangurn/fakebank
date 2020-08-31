@@ -26,13 +26,15 @@
                             </thead>
                             <tbody>
                             @if(!$accounts->isEmpty())
+                                @foreach($accounts as $account)
                                 <tr>
-                                    <td>{{ $accounts->bank->name  }}</td>
-                                    <td>{{ $accounts->type  }}</td>
-                                    <td>{{ $accounts->number  }}</td>
-                                    <td>{{ $accounts->balance  }}</td>
+                                    <td>{{ $account->bank->name  }}</td>
+                                    <td>{{ $account->type  }}</td>
+                                    <td>{{ $account->number  }}</td>
+                                    <td>{{ $account->balance  }}</td>
                                     <td></td>
                                 </tr>
+                                @endforeach
                             @else
                                 <tr>
                                     <td colspan="5">None configured</td>

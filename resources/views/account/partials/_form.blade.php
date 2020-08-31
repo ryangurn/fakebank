@@ -7,7 +7,7 @@
         <div class="form-group">
             <label for="name">Bank</label>
             @if(isset($banks) && !$banks->isEmpty())
-                <select name="account_id" class="form-control">
+                <select name="bank_id" class="form-control">
                     @foreach($banks as $bank)
                         <option @if(isset($account) && $account->bank_id != null && $account->bank_id == $bank->id) selected="selected" @endif value="{{ $bank->id  }}">{{ $bank->name  }}</option>
                     @endforeach
@@ -17,7 +17,7 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="caption">Type</label>
+            <label for="type">Type</label>
             <select name="type" class="form-control">
                 <optgroup label="Standard">
                     <option @if(isset($account) && $account->type == 0) selected="selected" @endif value="0">Savings</option>
@@ -28,12 +28,12 @@
         </div>
 
         <div class="form-group">
-            <label for="name">Number</label>
-            <input type="text" name="amount" class="form-control" placeholder="Account Number" @if(isset($account) && $account->number != null)value="{{ $account->number  }}"@endif />
+            <label for="number">Number</label>
+            <input type="text" name="number" class="form-control" placeholder="Account Number" @if(isset($account) && $account->number != null)value="{{ $account->number  }}"@endif />
         </div>
 
         <div class="form-group">
-            <label for="name">Balance</label>
+            <label for="balance">Balance</label>
             <input type="text" name="balance" class="form-control" placeholder="Account Balance" @if(isset($account) && $account->balance != null)value="{{ $account->balance  }}"@endif />
         </div>
 
