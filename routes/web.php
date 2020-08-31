@@ -37,6 +37,7 @@ Route::domain('admin.fakebank.test')->group(function(){
             Route::get('/', 'AccountController@index')->name('account.index');
             Route::get('/create', 'AccountController@create')->name('account.create');
             Route::post('/', 'AccountController@store')->name('account.store');
+            Route::get('/{account}', 'AccountController@show')->name('account.show');
         });
 
         Route::group(['prefix' => 'transaction'], function(){

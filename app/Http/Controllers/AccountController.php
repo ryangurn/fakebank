@@ -79,12 +79,12 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Account $account
      * @return Response
      */
-    public function show($id)
+    public function show(Account $account)
     {
-        //
+        return view('account.show', compact('account'));
     }
 
     /**
