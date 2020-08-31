@@ -93,9 +93,11 @@ class AccountController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Account $account)
     {
-        //
+        $variables = ['form' => ['action' => route('account.update', $account->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        $banks = Bank::all();
+        return view('account.update', compact('account', 'variables', 'banks'));
     }
 
     /**

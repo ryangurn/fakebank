@@ -38,6 +38,8 @@ Route::domain('admin.fakebank.test')->group(function(){
             Route::get('/create', 'AccountController@create')->name('account.create');
             Route::post('/', 'AccountController@store')->name('account.store');
             Route::get('/{account}', 'AccountController@show')->name('account.show');
+            Route::get('/edit/{account}', 'AccountController@edit')->name('account.edit');
+            Route::put('/{account}', 'AccountController@update')->name('account.update');
         });
 
         Route::group(['prefix' => 'transaction'], function(){
