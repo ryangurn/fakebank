@@ -34,6 +34,7 @@
                                     <td>{{ $account->balance  }}</td>
                                     <td>
                                         <a href="{{ route('account.show', $account->id)  }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Account: {{ $account->number }}">Show</a>
+                                        <a href="{{ route('account.edit', $account->id)  }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Show Account: {{ $account->number }}">Edit</a>
                                     </td>
                                 </tr>
                                 @endforeach
