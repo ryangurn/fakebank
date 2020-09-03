@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Bank;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -90,7 +91,7 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Account $account
      * @return Response
      */
     public function edit(Account $account)
@@ -104,22 +105,36 @@ class AccountController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param Account $account
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Account $account)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $account->bank_id = $request->get('bank_id');
+        $account->type = $request->get('type');
+        $account->number = $request->get('number');
+        $account->balance = $request->get('balance');
+        $account->save();
+
+        return redirect()->route('account.index')->with('success', 'Account Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Account $account
      * @return Response
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(Account $account)
     {
-        //
+        $account->delete();
+        return redirect()->route('account.index')->with('success', 'Account Deleted');
     }
 }
