@@ -20,9 +20,9 @@
             <label for="type">Type</label>
             <select name="type" class="form-control">
                 <optgroup label="Standard">
-                    <option @if(isset($account) && $account->type == 0) selected="selected" @endif value="0">Savings</option>
-                    <option @if(isset($account) && $account->type == 1) selected="selected" @endif value="1">Checking</option>
-                    <option @if(isset($account) && $account->type == 2) selected="selected" @endif value="2">Credit Card</option>
+                    <option @if(isset($account) && $account->type == "Saving") selected="selected" @endif value="0">Savings</option>
+                    <option @if(isset($account) && $account->type == "Checking") selected="selected" @endif value="1">Checking</option>
+                    <option @if(isset($account) && $account->type == "Credit Card") selected="selected" @endif value="2">Credit Card</option>
                 </optgroup>
             </select>
         </div>
@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label for="balance">Balance</label>
-            <input type="text" name="balance" class="form-control" placeholder="Account Balance" @if(isset($account) && $account->balance != null)value="{{ $account->balance  }}"@endif />
+            <input type="text" name="balance" class="form-control" placeholder="Account Balance" @if(isset($account) && $account->balance != null)value="{{ substr($account->balance, 1)  }}"@endif />
         </div>
 
         <div class="form-group">

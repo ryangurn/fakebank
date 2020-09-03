@@ -33,7 +33,7 @@
 
                     <div class="card-body">
 
-                        <form action="" method="POST">
+                        <form action="{{ route('account.destroy', $account->id)  }}" method="POST">
                             {{ csrf_field()  }}
                             <input type="hidden" name="_method" value="DELETE" />
 
