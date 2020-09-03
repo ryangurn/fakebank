@@ -61,10 +61,27 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item dropdown">
+                                <a id="dataDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" v-pre>
+                                    Templates <span class="caret"></span>
+                                </a>
 
-                            <li class="nav-item @if(url()->current() == route('bank.index')) active @endif"><a class="nav-link" href="{{ route('bank.index')  }}">Banks</a></li>
-                            <li class="nav-item @if(url()->current() == route('account.index')) active @endif"><a class="nav-link" href="{{ route('account.index')  }}">Accounts</a></li>
-                            <li class="nav-item @if(url()->current() == route('transaction.index')) active @endif"><a class="nav-link" href="{{ route('transaction.index')  }}">Transactions</a></li>
+                                <div class="dropdown-menu dropdown-menu-right">
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="dataDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" v-pre>
+                                    Data <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ route('bank.index')  }}">Banks</a>
+                                    <a class="dropdown-item" href="{{ route('account.index')  }}">Accounts</a>
+                                    <a class="dropdown-item" href="{{ route('transaction.index')  }}">Transactions</a>
+                                </div>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
