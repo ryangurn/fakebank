@@ -15,8 +15,8 @@ class CreateTemplatesTable extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('bank_id');
-            $table->longText('settings')->default([]);
+            $table->unsignedInteger('bank_id');
+            $table->longText('settings')->default(json_encode([]));
             $table->text('resource');
             $table->timestamps();
         });
