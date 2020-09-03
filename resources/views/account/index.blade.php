@@ -28,7 +28,7 @@
                             @if(!$accounts->isEmpty())
                                 @foreach($accounts as $account)
                                 <tr>
-                                    <td>{{ $account->bank->name  }}</td>
+                                    <td><a href="{{ route('bank.show', $account->bank->id)  }}">{{ $account->bank->name  }}</a></td>
                                     <td>{{ $account->type  }}</td>
                                     <td>{{ $account->number  }}</td>
                                     <td>{{ $account->balance  }}</td>

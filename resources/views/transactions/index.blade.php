@@ -28,7 +28,7 @@
                             @if(!$transactions->isEmpty())
                                 @foreach($transactions as $transaction)
                                 <tr>
-                                    <td>{{ $transaction->account->number }}</td>
+                                    <td><a href="{{ route('account.show', $transaction->account->id)  }}">{{ $transaction->account->number }}</a></td>
                                     <td>{{ $transaction->description }}</td>
                                     <td>${{ $transaction->amount }}</td>
                                     <td>{{ date('M d,Y', $transaction->time) }}</td>
