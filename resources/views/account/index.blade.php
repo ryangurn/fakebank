@@ -35,17 +35,6 @@
                                     <td>
                                         <a href="{{ route('account.show', $account->id)  }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Account: {{ $account->number }}">Show</a>
                                         <a href="{{ route('account.edit', $account->id)  }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Show Account: {{ $account->number }}">Edit</a>
-
-                                        <form action="{{ route('account.generate', $account->id)  }}" method="POST">
-                                            {{ csrf_field() }}
-
-                                            <input type="hidden" name="count" value="5" />
-
-                                            <button type="submit" class="btn badge-pill badge-danger">
-                                                Generate Transactions
-                                            </button>
-
-                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
