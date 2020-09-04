@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Bank;
+use App\Transaction;
 use Exception;
+use Faker\Factory;
+use Faker\Generator;
+use Faker\Provider\Base;
+use Faker\Provider\Company;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -28,6 +33,19 @@ class AccountController extends Controller
         'number.numeric' => 'A bank account must be a numeric value',
         'balance.required' => 'A bank account balance is required',
         'balance.numeric' => 'A bank account balance must be numeric',
+    ];
+
+    protected $generateValidator = [
+        'account_id' => 'required|exists:accounts,id|integer',
+        'count' => 'required|integer'
+    ];
+
+    protected $generateMessages = [
+        'account_id.required' => 'A bank account is required',
+        'account_id.exists' => 'The bank account must already exist',
+        'account_id.integer' => 'The bank account is an integer',
+        'count.required' => 'The number of transactions is required',
+        'count.integer' => 'The count must be an integer'
     ];
 
     /**
@@ -136,5 +154,37 @@ class AccountController extends Controller
     {
         $account->delete();
         return redirect()->route('account.index')->with('success', 'Account Deleted');
+    }
+
+    /**
+     * Generate transactions given a specific account
+     *
+     * @param Account $account
+     * @return Response
+     */
+    public function generateTransactions(Request $request, Account $account)
+    {
+        $request->merge(['account_id' => $account->id]);
+        $validator = validator($request->all(), $this->generateValidator, $this->generateMessages);
+
+        if ($validator->fails())
+        {
+            return back()->withErrors($validator);
+        }
+
+        for ($i = 0; $i < $request->get('count'); $i++)
+        {
+            //faker
+            $generator = Factory::create();
+
+            $transaction = new Transaction();
+            $transaction->account_id = $account->id;
+            $transaction->description = $generator->company;
+            $transaction->amount = $generator->randomFloat(2, 0.01, 9999.99);
+            $transaction->save();
+
+        }
+
+        return redirect()->route('account.index')->with('success', 'Generated '.$request->get('count').' transactions for account.');
     }
 }
