@@ -32,6 +32,27 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="mb-4 mt-4"></div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">Generate Transactions</div>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="{{ route('account.generate', $account->id)  }}" method="POST">
+                            {{ csrf_field() }}
+
+                            <input type="hidden" name="count" value="5" />
+
+                            <button type="submit" class="btn badge-pill badge-danger">
+                                Generate 5 Transactions
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
