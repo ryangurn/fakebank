@@ -9,6 +9,14 @@ use Illuminate\Http\Response;
 
 class TemplateController extends Controller
 {
+    public $validator = [
+
+    ];
+
+    public $messages = [
+
+    ];
+
     /**
      * Display a listing of the resource.
      *
