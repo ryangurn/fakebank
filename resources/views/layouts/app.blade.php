@@ -67,7 +67,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right">
-
+                                    <a class="dropdown-item" href="{{ route('template.index') }}">Templates</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
