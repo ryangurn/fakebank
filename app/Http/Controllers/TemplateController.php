@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Bank;
+use App\Template;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -14,7 +16,8 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        //
+        $templates = Template::all();
+        return view('template.index', compact('templates'));
     }
 
     /**
@@ -24,7 +27,9 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        //
+        $banks = Bank::all();
+        $variables = ['form' => ['action' => route('template.store'), 'method' => 'POST']];
+        return view('template.create', compact('banks', 'variables'));
     }
 
     /**

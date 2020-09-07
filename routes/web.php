@@ -21,6 +21,12 @@ Route::domain('admin.fakebank.test')->group(function(){
     Auth::routes();
 
     Route::group(['middleware' => 'auth'], function() {
+        Route::group(['prefix' => 'template'], function() {
+            Route::get('/', 'TemplateController@index')->name('template.index');
+            Route::get('/create', 'TemplateController@create')->name('template.create');
+            Route::post('/', 'TemplateController@store')->name('template.store');
+        });
+
         Route::group(['prefix' => 'bank'], function(){
             Route::get('/', 'BankController@index')->name('bank.index');
             Route::get('/create', 'BankController@create')->name('bank.create');
