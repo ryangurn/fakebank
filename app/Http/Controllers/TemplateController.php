@@ -73,45 +73,60 @@ class TemplateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Template $template
      * @return Response
      */
-    public function show($id)
+    public function show(Template $template)
     {
-        //
+        return view('template.show', compact('template'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Template $template
      * @return Response
      */
-    public function edit($id)
+    public function edit(Template $template)
     {
-        //
+        $banks = Bank::all();
+        $variables = ['form' => ['action' => route('template.update', $template->id), 'method' => 'PUT']];
+        return view('template.update', compact('template', 'variables', 'banks'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param Template $template
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Template $template)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $template->bank_id = $request->get('bank_id');
+        $template->resource = $request->get('resource');
+        $template->settings = $request->get('settings');
+        $template->save();
+
+        return redirect()->route('template.index')->with('success', 'Template Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Template $template
      * @return Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Template $template)
     {
-        //
+        $template->delete();
+        return redirect()->route('template.index')->with('success', 'Template Deleted!');
     }
 }
