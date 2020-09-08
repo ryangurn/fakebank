@@ -25,6 +25,10 @@ Route::domain('admin.fakebank.test')->group(function(){
             Route::get('/', 'TemplateController@index')->name('template.index');
             Route::get('/create', 'TemplateController@create')->name('template.create');
             Route::post('/', 'TemplateController@store')->name('template.store');
+            Route::get('/{template}', 'TemplateController@show')->name('template.show');
+            Route::get('/edit/{template}', 'TemplateController@edit')->name('template.edit');
+            Route::put('/{template}', 'TemplateController@update')->name('template.update');
+            Route::delete('/{template}', 'TemplateController@destroy')->name('template.destroy');
         });
 
         Route::group(['prefix' => 'bank'], function(){
