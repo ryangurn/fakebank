@@ -10,7 +10,7 @@
             @if(isset($banks) && !$banks->isEmpty())
             <select class="form-control" name="bank_id">
                 @foreach($banks as $bank)
-                    <option value="{{ $bank->id  }}">{{ $bank->name  }}</option>
+                    <option @if(isset($template) && $template->bank_id != null && $template->bank_id == $bank->id) selected="selected" @endif value="{{ $bank->id  }}">{{ $bank->name  }}</option>
                 @endforeach
             </select>
             @else
@@ -19,12 +19,12 @@
         </div>
         <div class="form-group">
             <label for="resource">Resource Path</label>
-            <input type="text" id="resource" name="resource" class="form-control" placeholder="Bank Resource" @if(isset($bank) && $bank->resource != null) value="{{ $bank->resource  }}" @endif />
+            <input type="text" id="resource" name="resource" class="form-control" placeholder="Bank Resource" @if(isset($template) && $template->resource != null) value="{{ $template->resource  }}" @endif />
         </div>
 
         <div class="form-group">
             <label for="name">Settings</label>
-            <textarea name="settings" class="form-control" placeholder="Settings for template, this must be in JSON form.">@if(isset($bank) && $bank->settings != null){{ json_encode($bank->settings)  }}@endif</textarea>
+            <textarea name="settings" class="form-control" placeholder="Settings for template, this must be in JSON form.">@if(isset($template) && $template->settings != null){{ json_encode($template->settings)  }}@endif</textarea>
         </div>
 
         <div class="form-group">
