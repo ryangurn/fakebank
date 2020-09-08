@@ -52,8 +52,8 @@
                                         <td>{{ $template->bank->name  }}</td>
                                         <td>{{ $template->resource  }}</td>
                                         <td>
-{{--                                            <a href="{{ route('bank.show', $bank->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Bank: {{ $bank->name }}">[Show]</a>--}}
-{{--                                            <a href="{{ route('bank.edit', $bank->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Bank: {{ $bank->name }}">[Edit]</a>--}}
+                                            <a href="{{ route('template.show', $template->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Template">[Show]</a>
+                                            <a href="{{ route('template.edit', $template->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Template">[Edit]</a>
                                         </td>
                                     </tr>
                                 @endforeach
