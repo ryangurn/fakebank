@@ -10,11 +10,18 @@ use Illuminate\Http\Response;
 class TemplateController extends Controller
 {
     public $validator = [
-
+        'bank_id' => 'required|exists:banks,id|integer',
+        'settings' => 'required|json',
+        'resource' => 'required',
     ];
 
     public $messages = [
-
+        'bank_id.required' => 'A bank is required',
+        'bank_id.exists' => 'The bank must already exist',
+        'bank_id.integer' => 'A bank ID is an integer',
+        'settings.required' => 'Settings are required, default: []',
+        'settings.json' => 'Settings must be a JSON object',
+        'resource.required' => 'A resource path is required'
     ];
 
     /**
@@ -48,7 +55,19 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        Template::create([
+            'bank_id' => $request->get('bank_id'),
+            'settings' => $request->get('settings'),
+            'resource' => $request->get('resource')
+        ]);
+
+        return redirect()->route('template.index')->with('success', 'Template was created!');
     }
 
     /**
