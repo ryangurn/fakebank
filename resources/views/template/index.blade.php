@@ -32,7 +32,7 @@
                         <div class="float-left">Templates</div>
 
                         <div class="float-right">
-                            <a href="{{ route('template.create') }}" class="oi oi-plus" data-toggle="tooltip" title="Create Bank"></a>
+                            <a href="{{ route('template.create') }}" class="oi oi-plus" data-toggle="tooltip" title="Create Template"></a>
                         </div>
                     </div>
 
