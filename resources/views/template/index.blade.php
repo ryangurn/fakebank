@@ -8,7 +8,11 @@
                     <div class="card-header">Information</div>
 
                     <div class="card-body">
+                        @if($bankCount == 0)
                         <div class="alert alert-warning">Before adding a template you must add a <a href="{{ route('bank.create')  }}">bank</a>.</div>
+                        @else
+                        <div class="alert alert-success">Variables are helpful to pass information to your resources.</div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -17,7 +21,11 @@
                     <div class="card-header">Variables</div>
 
                     <div class="card-body">
+                        @if($templateCount == 0)
                         <div class="alert alert-warning">Before adding variables you must add a template.</div>
+                        @else
+                            <div class="alert alert-primary">You can add variables to a template by clicking <a href="#" class="badge badge-pill badge-primary">[Show]</a> in the table below.</div>
+                        @endif
                     </div>
                 </div>
             </div>

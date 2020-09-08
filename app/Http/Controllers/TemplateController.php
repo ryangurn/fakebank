@@ -32,7 +32,12 @@ class TemplateController extends Controller
     public function index()
     {
         $templates = Template::all();
-        return view('template.index', compact('templates'));
+
+        // metadata
+        $bankCount = Bank::all()->count();
+        $templateCount = $templates->count();
+
+        return view('template.index', compact('templates', 'bankCount', 'templateCount'));
     }
 
     /**
