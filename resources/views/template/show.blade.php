@@ -32,5 +32,52 @@
 
             </div>
         </div>
+
+        <div class="mb-4 mt-4"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">Variables for {{ $template->bank->name }}</div>
+
+                        <div class="float-right">
+                            <a href="" class="oi oi-plus" data-toggle="tooltip" title="Create Variable"></a>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <p>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>Value</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @if(isset($variables) && !$variables->isEmpty())
+                                @foreach($variables as $variable)
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="3">{{ __('None Configured') }}</td>
+                                </tr>
+                            @endif
+                            </tbody>
+                        </table>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 @endsection
