@@ -42,7 +42,7 @@
                         <div class="float-left">Variables for {{ $template->bank->name }}</div>
 
                         <div class="float-right">
-                            <a href="" class="oi oi-plus" data-toggle="tooltip" title="Create Variable"></a>
+                            <a href="{{ route('variable.create', $template->id) }}" class="oi oi-plus" data-toggle="tooltip" title="Create Variable"></a>
                         </div>
                     </div>
 
