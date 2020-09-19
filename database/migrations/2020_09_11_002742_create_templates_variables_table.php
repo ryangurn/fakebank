@@ -18,6 +18,7 @@ class CreateTemplatesVariablesTable extends Migration
             $table->unsignedInteger('template_id');
             $table->string('variable');
             $table->longText('value');
+            $table->boolean('executable')->default(false);
             $table->timestamps();
         });
     }
