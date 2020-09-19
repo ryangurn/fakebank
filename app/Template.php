@@ -39,4 +39,8 @@ class Template extends Model
     public function bank() {
         return $this->hasOne(Bank::class, 'id', 'bank_id');
     }
+
+    public function variables() {
+        return $this->hasMany(TemplateVariable::class, 'template_id', 'id');
+    }
 }
