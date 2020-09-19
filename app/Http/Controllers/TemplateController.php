@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bank;
 use App\Template;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -127,7 +128,7 @@ class TemplateController extends Controller
      *
      * @param Template $template
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Template $template)
     {
