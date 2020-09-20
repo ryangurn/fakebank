@@ -5,10 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use NumberFormatter;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Account extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'account';
 
     protected $table = 'accounts';
 

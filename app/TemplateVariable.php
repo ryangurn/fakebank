@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class TemplateVariable
@@ -11,6 +12,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class TemplateVariable extends Model
 {
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'variable';
+
     /**
      * its good to be explicit, also i think
      * i broke the naming convention

@@ -3,9 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Bank extends Model
 {
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'bank';
+
     /**
      * be explicit, yes means yes.
      * @var string

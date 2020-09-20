@@ -4,9 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Template extends Model
 {
+    use LogsActivity;
+
+    protected static $logFillable = true;
+    protected static $logName = 'template';
+
     /**
      * be explicit, yes means yes.
      * @var string

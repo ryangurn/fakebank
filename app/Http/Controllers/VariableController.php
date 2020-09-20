@@ -70,7 +70,7 @@ class VariableController extends Controller
            'executable' => $exec
         ]);
 
-        return redirect()->route('variable.create')->with('success', 'Variable was created!');
+        return redirect()->route('variable.create', $template->id)->with('success', 'Variable was created!');
     }
 
     /**
