@@ -18,7 +18,7 @@
 
             <label class="btn btn-default btn-sm">
                 <input type="hidden" name="executable" value="no" />
-                <input type="checkbox" name="executable" value="yes" />
+                <input type="checkbox" name="executable" value="yes" @if(isset($variable) && $variable->executable != "" && $variable->executable == "True") checked="checked" @endif  />
                 Executable?
             </label>
             <small class="form-text text-muted">This will avoid being converted to html safe text if toggled on.</small>

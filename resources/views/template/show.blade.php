@@ -54,6 +54,7 @@
                                 <tr>
                                     <th>Variable</th>
                                     <th>Value</th>
+                                    <th>Executable</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -63,7 +64,17 @@
                                 <tr>
                                     <td>{{ $variable->variable  }}</td>
                                     <td>{{ $variable->value  }}</td>
-                                    <td></td>
+                                    <td>
+                                    @if($variable->executable == "True")
+                                            <span class="badge badge-success"><i class="oi oi-check"></i> {{ $variable->executable  }}</span>
+                                    @elseif($variable->executable == "False")
+                                        <span class="badge badge-danger"><i class="oi oi-x"></i> {{ $variable->executable  }}</span>
+                                    @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('variable.show', $variable->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Variable">[Show]</a>
+                                        <a href="{{ route('variable.edit', $variable->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Variable">[Edit]</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             @else
