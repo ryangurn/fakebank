@@ -64,7 +64,7 @@
                                         <td>
                                             <a href="{{ route('template.show', $template->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Template">[Show]</a>
                                             <a href="{{ route('template.edit', $template->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Template">[Edit]</a>
-                                            <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_{{ $template->id }}" data-toggle="tooltip" title="Activity Log">[Activity]</a>
+                                            <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_{{ $template->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>
                                         </td>
                                     </tr>
                                 @endforeach

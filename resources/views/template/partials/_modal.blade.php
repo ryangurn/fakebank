@@ -18,12 +18,17 @@
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#activity_{{ $activity->id }}" aria-expanded="true" aria-controls="collapseOne">
-                                    <b>{{ $activity->causer->name }}</b> {{ $activity->description }} template for bank <b>{{ $activity->subject->bank->name }}</b>
+                                    <span class="float-left">
+                                        <b>{{ $activity->causer->name }}</b> {{ $activity->description }} template for bank <b>{{ $activity->subject->bank->name }}</b>
+                                    </span>
+                                    <span class="float-right">
+                                        <span class="badge badge-primary">{{ $activity->created_at->diffForHumans()  }}</span>
+                                    </span>
                                 </button>
                             </h2>
                         </div>
 
-                        <div id="activity_{{ $activity->id }}" class="collapse show" aria-labelledby="headingOne" data-parent="#template_accordion">
+                        <div id="activity_{{ $activity->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#template_accordion">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2"><span class="badge badge-primary">Log</span></div>
