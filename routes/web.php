@@ -31,7 +31,8 @@ Route::domain('admin.fakebank.test')->group(function(){
             Route::delete('/{template}', 'TemplateController@destroy')->name('template.destroy');
 
             Route::group(['prefix' => 'variable'], function() {
-                Route::get('/create/{template}', 'VariableController@create')->name('variable.create');
+                Route::get('/{template}', 'VariableController@create')->name('variable.create');
+                Route::post('/{template}', 'VariableController@store')->name('variable.store');
             });
         });
 
