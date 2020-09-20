@@ -70,29 +70,30 @@ class VariableController extends Controller
            'executable' => $exec
         ]);
 
-        return redirect()->route('variable.create', $template->id)->with('success', 'Variable was created!');
+        return redirect()->route('template.show', $template->id)->with('success', 'Variable was created!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param TemplateVariable $variable
      * @return Response
      */
-    public function show($id)
+    public function show(TemplateVariable $variable)
     {
-        //
+        return view('template.variables.show', compact('variable'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param TemplateVariable $variable
      * @return Response
      */
-    public function edit($id)
+    public function edit(TemplateVariable $variable)
     {
-        //
+        $variables = ['form' => ['action' => route('variable.update', $variable->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        return view('template.variables.update', compact('variable', 'variables'));
     }
 
     /**
@@ -102,9 +103,35 @@ class VariableController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TemplateVariable $variable)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        // checking for uniqueness
+        $variables = TemplateVariable::where('template_id', '=', $variable->template->id)->where('id', '!=', $variable->id)->get()->pluck('');
+        if($variables->containsStrict($request->get('variable'))){
+            return back()->withErrors(['Variable must be unique to this template']);
+        }
+
+        $var = TemplateVariable::where('id', '=', $variable->id)->first();
+        $var->variable = $request->get('variable');
+        $var->value = $request->get('value');
+
+        // prepare executable
+        $exec = false;
+        switch ($request->get('executable')) {
+            case 'yes':
+                $exec = true;
+                break;
+        }
+        $var->executable = $exec;
+        $var->save();
+
+        return redirect()->route('template.show', $variable->template->id)->with('success', 'Variable Updated');
     }
 
     /**
