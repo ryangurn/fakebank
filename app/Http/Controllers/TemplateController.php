@@ -73,6 +73,12 @@ class TemplateController extends Controller
             return back()->withErrors($validator);
         }
 
+        // ensure that a duplicate template is not being added
+        $banks_used = Template::all()->pluck('bank_id');
+        if ($banks_used->containsStrict($request->get('bank_id'))) {
+            return back()->withErrors(['A template already exists for the selected bank.']);
+        }
+
         Template::create([
             'bank_id' => $request->get('bank_id'),
             'settings' => $request->get('settings'),
@@ -119,6 +125,12 @@ class TemplateController extends Controller
 
         if($validator->fails()){
             return back()->withErrors($validator);
+        }
+
+        // ensure that a duplicate template is not being added
+        $banks_used = Template::where('id', '!=', $template->id)->pluck('bank_id');
+        if ($banks_used->containsStrict($request->get('bank_id'))) {
+            return back()->withErrors(['A template already exists for the selected bank.']);
         }
 
         $template->bank_id = $request->get('bank_id');
