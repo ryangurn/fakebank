@@ -125,6 +125,8 @@
         </footer>
     </div>
 
+    @yield('modal')
+
     <script type="text/javascript" src="{{ asset('js/jquery.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/popper.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/app.js')  }}"></script>
