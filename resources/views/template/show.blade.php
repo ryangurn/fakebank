@@ -74,6 +74,7 @@
                                     <td>
                                         <a href="{{ route('variable.show', $variable->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Variable">[Show]</a>
                                         <a href="{{ route('variable.edit', $variable->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Variable">[Edit]</a>
+                                        <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_{{ $variable->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -91,4 +92,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('modal')
+    @include('template.variables.partials._modal')
 @endsection
