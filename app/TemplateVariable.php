@@ -15,7 +15,13 @@ class TemplateVariable extends Model
     use LogsActivity;
 
     protected static $logFillable = true;
-    protected static $logName = 'variable';
+    protected static $logName;
+
+    public function __construct(array $attributes = [])
+    {
+        self::$logName = env('ACTIVITY_LOGGER_TEMPLATE', 'template');
+        parent::__construct($attributes);
+    }
 
     /**
      * its good to be explicit, also i think

@@ -7,6 +7,7 @@ use App\Template;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Spatie\Activitylog\Models\Activity;
 
 class TemplateController extends Controller
 {
@@ -38,7 +39,10 @@ class TemplateController extends Controller
         $bankCount = Bank::all()->count();
         $templateCount = $templates->count();
 
-        return view('template.index', compact('templates', 'bankCount', 'templateCount'));
+        // activity log
+        $activity = Activity::where('log_name', '=', env('ACTIVITY_LOGGER_TEMPLATE', 'template'))->get();
+
+        return view('template.index', compact('templates', 'bankCount', 'templateCount', 'activity'));
     }
 
     /**
