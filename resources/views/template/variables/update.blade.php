@@ -21,5 +21,29 @@
                 </div>
             </div>
         </div>
+
+        <div class="mt-2 mb-2"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">Delete Variable: {{ $variable->variable }}</div>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="{{ route('variable.destroy', $variable->id)  }}" method="POST">
+                            {{ csrf_field()  }}
+                            <input type="hidden" name="_method" value="DELETE" />
+
+                            <div class="form-group">
+                                <input type="submit" class="form-control btn btn-danger" value="Delete Variable" />
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
