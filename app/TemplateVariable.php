@@ -36,6 +36,15 @@ class TemplateVariable extends Model
         'executable'
     ];
 
+    public function getExecutableAttribute($value) {
+        switch ($value){
+            case 0:
+                return "True";
+            default:
+                return "False";
+        }
+    }
+
     /**
      * defining relationship between
      * variable and template
