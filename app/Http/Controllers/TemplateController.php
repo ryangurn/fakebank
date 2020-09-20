@@ -96,7 +96,7 @@ class TemplateController extends Controller
     public function edit(Template $template)
     {
         $banks = Bank::all();
-        $variables = ['form' => ['action' => route('template.update', $template->id), 'method' => 'PUT']];
+        $variables = ['form' => ['action' => route('template.update', $template->id), 'method' => 'POST', 'hidden' => 'PUT']];
         return view('template.update', compact('template', 'variables', 'banks'));
     }
 
