@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Template;
 use App\TemplateVariable;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -137,11 +138,13 @@ class VariableController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param TemplateVariable $variable
      * @return Response
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(TemplateVariable $variable)
     {
-        //
+        $variable->delete();
+        return redirect()->route('template.show', $variable->template->id)->with('success', 'Variable Deleted');
     }
 }

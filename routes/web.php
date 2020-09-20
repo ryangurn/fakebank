@@ -36,6 +36,7 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::get('/show/{variable}', 'VariableController@show')->name('variable.show');
                 Route::get('/edit/{variable}', 'VariableController@edit')->name('variable.edit');
                 Route::put('/{variable}', 'VariableController@update')->name('variable.update');
+                Route::delete('/{variable}', 'VariableController@destroy')->name('variable.destroy');
             });
         });
 
