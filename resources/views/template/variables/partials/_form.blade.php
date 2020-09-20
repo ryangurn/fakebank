@@ -15,9 +15,12 @@
         </div>
 
         <div class="form-group">
-            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+
+            <label class="btn btn-default btn-sm">
+                <input type="hidden" name="executable" value="no" />
+                <input type="checkbox" name="executable" value="yes" />
                 Executable?
-            </button>
+            </label>
             <small class="form-text text-muted">This will avoid being converted to html safe text if toggled on.</small>
         </div>
 

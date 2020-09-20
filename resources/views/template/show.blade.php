@@ -58,11 +58,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if(isset($variables) && !$variables->isEmpty())
-                                @foreach($variables as $variable)
+                            @if(isset($template->variables) && !$template->variables->isEmpty())
+                                @foreach($template->variables as $variable)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $variable->variable  }}</td>
+                                    <td>{{ $variable->value  }}</td>
                                     <td></td>
                                 </tr>
                                 @endforeach
