@@ -38,7 +38,7 @@ class TemplateVariable extends Model
 
     public function getExecutableAttribute($value) {
         switch ($value){
-            case 0:
+            case 1:
                 return "True";
             default:
                 return "False";
