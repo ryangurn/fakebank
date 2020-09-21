@@ -1,6 +1,6 @@
 @if(!$templates->isEmpty())
     @foreach($templates as $template)
-<div class="modal" id="activity_{{ $template->id }}" tabindex="-1">
+<div class="modal" id="activity_template_{{ $template->id }}" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
