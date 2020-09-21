@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label for="balance">Balance</label>
-            <input type="text" name="balance" class="form-control" placeholder="Account Balance" @if(isset($account) && $account->balance != null)value="{{ substr($account->balance, 1)  }}"@endif />
+            <input type="text" name="balance" class="form-control" placeholder="Account Balance" @if(isset($account) && $account->balance != null)value="{{ str_replace(",", "", substr($account->balance, 1))  }}"@endif />
         </div>
 
         <div class="form-group">
