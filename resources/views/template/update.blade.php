@@ -9,7 +9,7 @@
                         <div class="float-left">Update Template for {{ $template->bank->name }}</div>
 
                         <div class="float-right">
-                            <a href="{{ route('template.index') }}" class="oi oi-arrow-left" data-toggle="tooltip" title="Back"></a>
+                            <a href="{{ url()->previous() }}" class="oi oi-arrow-left" data-toggle="tooltip" title="Back"></a>
                         </div>
                     </div>
 
