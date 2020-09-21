@@ -35,6 +35,7 @@
                                     <td>
                                         <a href="{{ route('transaction.show', $transaction->id)  }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Transaction: {{ $transaction->description }}">Show</a>
                                         <a href="{{ route('transaction.edit', $transaction->id)  }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Transaction: {{ $transaction->description }}">Edit</a>
+                                        <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_transaction_{{ $transaction->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -50,4 +51,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('modal')
+    @include('transactions.partials._log_modal')
 @endsection
