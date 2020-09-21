@@ -1,6 +1,6 @@
 @if(isset($template->variables) && !$template->variables->isEmpty())
     @foreach($template->variables as $variable)
-<div class="modal" id="activity_{{ $variable->id }}" tabindex="-1">
+<div class="modal" id="activity_variable_{{ $variable->id }}" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
