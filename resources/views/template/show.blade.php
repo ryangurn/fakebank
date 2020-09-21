@@ -22,11 +22,17 @@
                             @if($template->settings != null)
                             <div class="row">
                                 <div class="col-md-2"><span class="badge badge-danger">Settings</span></div>
-                                <div class="col-md-10"><pre>{{ json_encode($template->settings)  }}</pre></div>
+                                <div class="col-md-10"><pre>{{ $template->settings  }}</pre></div>
                             </div>
                             <br />
                             @endif
                         </p>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <a href="{{ route('template.index') }}" class="badge badge-pill badge-primary">[List]</a>
+                        <a href="{{ route('template.edit', $template->id) }}" class="badge badge-pill badge-warning">[Edit]</a>
+                        <a href="#" data-backdrop="true" data-toggle="modal" data-target="#activity_template_{{ $template->id }}" data-toggle="tooltip" title="Activity Log" class="badge badge-pill badge-danger">[Logs]</a>
                     </div>
                 </div>
 

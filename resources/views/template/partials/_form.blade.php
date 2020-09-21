@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <label for="name">Settings</label>
-            <textarea name="settings" class="form-control" placeholder="Settings for template, this must be in JSON form.">@if(isset($template) && $template->settings != null){{ json_encode($template->settings)  }}@endif</textarea>
+            <textarea name="settings" class="form-control" placeholder="Settings for template, this must be in JSON form.">@if(isset($template) && $template->settings != null){{ $template->settings  }}@endif</textarea>
         </div>
 
         <div class="form-group">
