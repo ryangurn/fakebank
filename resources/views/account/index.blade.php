@@ -35,6 +35,7 @@
                                     <td>
                                         <a href="{{ route('account.show', $account->id)  }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Account: {{ $account->number }}">Show</a>
                                         <a href="{{ route('account.edit', $account->id)  }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Show Account: {{ $account->number }}">Edit</a>
+                                        <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_account_{{ $account->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -50,4 +51,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('modal')
+    @include('account.partials._log_modal')
 @endsection
