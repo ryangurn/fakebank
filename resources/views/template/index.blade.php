@@ -83,5 +83,5 @@
 @endsection
 
 @section('modal')
-    @include('template.partials._modal')
+    @include('template.partials._log_modal')
 @endsection

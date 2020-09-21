@@ -101,6 +101,6 @@
 @endsection
 
 @section('modal')
-    @include('template.variables.partials._modal')
-    @include('template.partials._modal')
+    @include('template.variables.partials._log_modal')
+    @include('template.partials._log_modal')
 @endsection
