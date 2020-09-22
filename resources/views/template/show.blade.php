@@ -54,7 +54,6 @@
 
 
                     <div class="card-body">
-                        <p>
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
@@ -91,7 +90,53 @@
                             @endif
                             </tbody>
                         </table>
-                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mb-4 mt-4"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">Files for {{ $template->bank->name }}</div>
+
+                        <div class="float-right">
+                            <a href="" class="oi oi-cloud-upload" data-toggle="tooltip" title="Upload File"></a>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>Purpose</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @if(isset($template->files) && !$template->files->isEmpty())
+                                @foreach($template->files as $file)
+                                <tr>
+                                    <td>{{ $file->storage  }}</td>
+                                    <td>{{ $file->type  }}</td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="3">{{ __('None Configured') }}</td>
+                                </tr>
+                            @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
