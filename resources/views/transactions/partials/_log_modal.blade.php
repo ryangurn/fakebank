@@ -19,7 +19,7 @@
                                                 <h2 class="mb-0">
                                                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#activity_{{ $activity->id }}" aria-expanded="true" aria-controls="collapseOne">
                                                         <span class="float-left">
-                                                            <b>{{ $activity->causer->name }}</b> {{ $activity->description }} variable for template <b>{{ $activity->subject->description }}</b>
+                                                            <b>{{ $activity->causer->name }}</b> {{ $activity->description }} transaction <b>{{ $activity->subject->description }}</b>
                                                         </span>
                                                                             <span class="float-right">
                                                             <span class="badge badge-primary">{{ $activity->created_at->diffForHumans()  }}</span>
