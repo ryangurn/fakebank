@@ -43,4 +43,8 @@ class Bank extends Model
     public function accounts(){
         return $this->hasMany(Account::class);
     }
+
+    public function template(){
+        return $this->hasOne(Template::class);
+    }
 }
