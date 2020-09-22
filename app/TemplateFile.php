@@ -20,5 +20,7 @@ class TemplateFile extends Model
         'type'
     ];
 
-
+    public function template() {
+        return $this->hasOne(Template::class, 'id', 'template_id');
+    }
 }

@@ -49,4 +49,8 @@ class Template extends Model
     public function variables() {
         return $this->hasMany(TemplateVariable::class, 'template_id', 'id');
     }
+
+    public function files() {
+        return $this->hasMany(TemplateFile::class, 'template_id', 'id');
+    }
 }
