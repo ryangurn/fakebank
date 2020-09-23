@@ -105,7 +105,7 @@
                         <div class="float-left">Files for {{ $template->bank->name }}</div>
 
                         <div class="float-right">
-                            <a href="" class="oi oi-cloud-upload" data-toggle="tooltip" title="Upload File"></a>
+                            <a href="{{ route('file.create', $template->id) }}" class="oi oi-cloud-upload" data-toggle="tooltip" title="Upload File"></a>
                         </div>
                     </div>
 
