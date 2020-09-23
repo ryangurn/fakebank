@@ -79,6 +79,12 @@ class TemplateController extends Controller
             return back()->withErrors(['A template already exists for the selected bank.']);
         }
 
+        if (is_dir(resource_path('views/public/'.$request->get('resource')))) {
+            return back()->withErrors(['Resource path already taken']);
+        }
+
+        mkdir(resource_path('views/public/' . $request->get('resource')));
+
         Template::create([
             'bank_id' => $request->get('bank_id'),
             'settings' => $request->get('settings'),
