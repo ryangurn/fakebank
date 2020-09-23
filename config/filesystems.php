@@ -43,6 +43,11 @@ return [
 
     'disks' => [
 
+        'template' => [
+            'driver' => 'local',
+            'root' => resource_path('views/public'),
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
