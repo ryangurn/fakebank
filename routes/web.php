@@ -38,6 +38,11 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::put('/{variable}', 'VariableController@update')->name('variable.update');
                 Route::delete('/{variable}', 'VariableController@destroy')->name('variable.destroy');
             });
+
+            Route::group(['prefix' => 'file'], function() {
+                Route::get('/{template}', 'FileController@create')->name('file.create');
+                Route::post('/{template}', 'FileController@store')->name('file.store');
+            });
         });
 
         Route::group(['prefix' => 'bank'], function(){
