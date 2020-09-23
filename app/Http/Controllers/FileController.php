@@ -10,13 +10,14 @@ use Illuminate\Http\Response;
 class FileController extends Controller
 {
     public $validator = [
-        'file' => 'required|file',
+        'file' => 'required|file|mimes:php,html',
         'purpose' => 'required|numeric|in:0,1,2',
     ];
 
     public $messages = [
         'file.required' => 'A file is required',
         'file.file' => 'Please select a valid file',
+        'file.mimes' => 'Please upload a valid blade file',
         'purpose.required' => 'A file purpose is required',
         'purpose.numeric' => 'Please select a valid file purpose',
         'purpose.in' => 'Please select a valid file purpose'
@@ -38,6 +39,7 @@ class FileController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @param Template $template
      * @return Response
      */
     public function store(Request $request, Template $template)
@@ -52,8 +54,15 @@ class FileController extends Controller
             return back()->withErrors(['Resource path does not exist']);
         }
 
-        $request->file->store($template->resource, 'template');
+        $request->file->storeAs($template->resource, $request->file->getClientOriginalName(),'template');
 
+        TemplateFile::create([
+            'template_id' => $template->id,
+            'type' => $request->get('purpose'),
+            'storage' => $request->file->getClientOriginalName()
+        ]);
+
+        return redirect()->route('template.show', $template->id)->with('success', 'File was successfully uploaded!');
     }
 
     /**
