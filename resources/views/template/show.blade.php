@@ -127,6 +127,7 @@
                                     <td>{{ $file->type  }}</td>
                                     <td>
                                         <a href="{{ route('file.show', $file->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show File">[Show]</a>
+                                        <a href="{{ route('file.edit', $file->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit File">[Edit]</a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -98,12 +98,13 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param TemplateFile $templateFile
+     * @param TemplateFile $file
      * @return Response
      */
-    public function edit(TemplateFile $templateFile)
+    public function edit(TemplateFile $file)
     {
-        //
+        $variables = ['form' => ['action' => route('file.store', $file->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        return view('template.files.update', compact('file', 'variables'));
     }
 
     /**

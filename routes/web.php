@@ -43,6 +43,8 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::get('/{template}', 'FileController@create')->name('file.create');
                 Route::post('/{template}', 'FileController@store')->name('file.store');
                 Route::get('/show/{file}', 'FileController@show')->name('file.show');
+                Route::get('/edit/{file}', 'FileController@edit')->name('file.edit');
+                Route::put('/{file}', 'FileController@update')->name('file.update');
             });
         });
 
