@@ -51,10 +51,29 @@ class FileController extends Controller
         }
 
         if (!is_dir(resource_path('views/public/'.$template->resource))) {
-            return back()->withErrors(['Resource path does not exist']);
+            mkdir(resource_path('views/public/'.$template->resource));
+            return back()->withErrors(['Resource path does not exist, it has just been created again!']);
         }
 
-        $request->file->storeAs($template->resource, $request->file->getClientOriginalName(),'template');
+        // get path & validate it
+        $subPath = '';
+        switch ($request->get('purpose')) {
+            case 0:
+                $subPath = 'layouts';
+                break;
+            case 1:
+                $subPath = 'partials';
+                break;
+            case 2:
+                $subPath = 'modals';
+                break;
+        }
+        if ($subPath != '' && !is_dir(resource_path('views/public/'.$template->resource.'/'.$subPath))) {
+            mkdir(resource_path('views/public/'.$template->resource.'/'.$subPath));
+            return back()->withErrors(['Purpose path does not exist, it has just been created again!']);
+        }
+
+        $request->file->storeAs($template->resource."/".$subPath, $request->file->getClientOriginalName(), 'template');
 
         TemplateFile::create([
             'template_id' => $template->id,
