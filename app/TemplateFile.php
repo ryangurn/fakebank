@@ -20,6 +20,19 @@ class TemplateFile extends Model
         'type'
     ];
 
+    public function getTypeAttribute($value) {
+        switch ($value){
+            case 0:
+                return "Layout";
+            case 1:
+                return "Partial";
+            case 2:
+                return "Modal";
+            default:
+                return;
+        }
+    }
+
     public function template() {
         return $this->hasOne(Template::class, 'id', 'template_id');
     }
