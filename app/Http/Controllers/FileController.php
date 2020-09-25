@@ -87,12 +87,12 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param TemplateFile $templateFile
+     * @param TemplateFile $file
      * @return Response
      */
-    public function show(TemplateFile $templateFile)
+    public function show(TemplateFile $file)
     {
-        //
+        return view('template.files.show', compact('file'));
     }
 
     /**

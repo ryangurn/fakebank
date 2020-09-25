@@ -126,7 +126,7 @@
                                     <td>{{ $file->storage  }}</td>
                                     <td>{{ $file->type  }}</td>
                                     <td>
-
+                                        <a href="{{ route('file.show', $file->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show File">[Show]</a>
                                     </td>
                                 </tr>
                                 @endforeach

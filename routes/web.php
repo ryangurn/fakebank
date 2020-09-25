@@ -42,6 +42,7 @@ Route::domain('admin.fakebank.test')->group(function(){
             Route::group(['prefix' => 'file'], function() {
                 Route::get('/{template}', 'FileController@create')->name('file.create');
                 Route::post('/{template}', 'FileController@store')->name('file.store');
+                Route::get('/show/{file}', 'FileController@show')->name('file.show');
             });
         });
 
