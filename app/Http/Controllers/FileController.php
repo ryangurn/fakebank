@@ -160,11 +160,14 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param TemplateFile $templateFile
+     * @param TemplateFile $file
      * @return Response
      */
-    public function destroy(TemplateFile $templateFile)
+    public function destroy(TemplateFile $file)
     {
-        //
+        $template = $file->template->id;
+        File::delete(resource_path('views/public/'.$file->template->resource.'/'.strtolower($file->type).'s/'.$file->storage));
+        $file->delete();
+        return redirect()->route('template.show', $template)->with('success', 'File Deleted');
     }
 }

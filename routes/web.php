@@ -45,6 +45,7 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::get('/show/{file}', 'FileController@show')->name('file.show');
                 Route::get('/edit/{file}', 'FileController@edit')->name('file.edit');
                 Route::put('/{file}', 'FileController@update')->name('file.update');
+                Route::delete('/{file}', 'FileController@destroy')->name('file.destroy');
             });
         });
 
