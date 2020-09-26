@@ -36,4 +36,8 @@ class TemplateFile extends Model
     public function template() {
         return $this->hasOne(Template::class, 'id', 'template_id');
     }
+
+    public function routes() {
+        return $this->hasMany(TemplateRoute::class, 'id', 'file_id');
+    }
 }
