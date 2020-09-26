@@ -99,7 +99,7 @@
         <div class="mb-4 mt-4"></div>
 
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">Files for {{ $template->bank->name }}</div>
@@ -128,6 +128,7 @@
                                     <td>
                                         <a href="{{ route('file.show', $file->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show File">[Show]</a>
                                         <a href="{{ route('file.edit', $file->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit File">[Edit]</a>
+                                        <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_file_{{ $file->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -148,5 +149,6 @@
 
 @section('modal')
     @include('template.variables.partials._log_modal')
+    @include('template.files.partials._log_modal')
     @include('template.partials._log_modal')
 @endsection
