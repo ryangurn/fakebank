@@ -6,6 +6,7 @@ use App\Template;
 use App\TemplateFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 
 class FileController extends Controller
 {
@@ -111,12 +112,49 @@ class FileController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param TemplateFile $templateFile
+     * @param TemplateFile $file
      * @return Response
      */
-    public function update(Request $request, TemplateFile $templateFile)
+    public function update(Request $request, TemplateFile $file)
     {
-        //
+        $validator = validator($request->all(), ["purpose" => $this->validator['purpose']], $this->messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $subPath = '';
+        switch ($request->get('purpose')) {
+            case 0:
+                $subPath = 'layouts';
+                break;
+            case 1:
+                $subPath = 'partials';
+                break;
+            case 2:
+                $subPath = 'modals';
+                break;
+        }
+
+        // check the original path
+        if (!file_exists(resource_path('views/public/'.$file->template->resource.'/'.strtolower($file->type).'s/'.$file->storage))) {
+            return back()->withErrors(['Original file cannot be located']);
+        }
+
+        // check the new path
+        if (!is_dir(resource_path('views/public/'.$file->template->resource.'/'.$subPath))) {
+            mkdir(resource_path('views/public/'.$file->template->resource.'/'.$subPath));
+            // return back()->withErrors(['New location does not exist, try again.']);
+        }
+
+        // move the file
+        File::move(resource_path('views/public/'.$file->template->resource.'/'.strtolower($file->type).'s/'.$file->storage), resource_path('views/public/'.$file->template->resource.'/'.$subPath.'/'.$file->storage));
+
+        // change the resources model.
+        $file->type = $request->get('purpose');
+        $file->save();
+
+        return redirect()->route('template.show', $file->template->id)->with('success', 'File Updated');
     }
 
     /**
