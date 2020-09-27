@@ -57,7 +57,7 @@ class TemplateController extends Controller
     {
         $templates = Template::all()->pluck('bank_id')->toArray();
 
-        $banks = Bank::where('id', '!=', $templates)->get();
+        $banks = Bank::whereNotIn('id', $templates)->get();
         $variables = ['form' => ['action' => route('template.store'), 'method' => 'POST']];
         return view('template.create', compact('banks', 'variables'));
     }
