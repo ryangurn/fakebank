@@ -47,6 +47,10 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::put('/{file}', 'FileController@update')->name('file.update');
                 Route::delete('/{file}', 'FileController@destroy')->name('file.destroy');
             });
+
+            Route::group(['prefix' => 'route'], function() {
+               Route::get('/{template}', 'RouteController@create')->name('route.create');
+            });
         });
 
         Route::group(['prefix' => 'bank'], function(){
