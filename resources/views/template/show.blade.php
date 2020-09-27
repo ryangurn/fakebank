@@ -172,6 +172,7 @@
                                         <td>
                                             <a href="{{ route('route.show', $route->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Route">[Show]</a>
                                             <a href="{{ route('route.edit', $route->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Route">[Edit]</a>
+                                            <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_route_{{ $route->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -191,6 +192,7 @@
 @endsection
 
 @section('modal')
+    @include('template.routes.partials._log_modal')
     @include('template.variables.partials._log_modal')
     @include('template.files.partials._log_modal')
     @include('template.partials._log_modal')
