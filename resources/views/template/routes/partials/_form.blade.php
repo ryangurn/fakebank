@@ -19,7 +19,7 @@
 
         <div class="form-group">
             <label for="route">Route</label>
-            <input name="route" class="form-control" placeholder="Route slug" />
+            <input name="route" class="form-control" placeholder="Route slug" @if(isset($route) && $route->route != null) value="{{ $route->route  }}" @endif />
         </div>
 
         <div class="form-group">

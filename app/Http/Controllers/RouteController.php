@@ -89,7 +89,7 @@ class RouteController extends Controller
     public function edit(TemplateRoute $route)
     {
         $template = $route->template;
-        $variables = ['form' => ['action' => route('template.update', $route->template->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        $variables = ['form' => ['action' => route('route.update', $route->id), 'method' => 'POST', 'hidden' => 'PUT']];
         return view('template.routes.update', compact('route', 'variables', 'template'));
     }
 
@@ -97,12 +97,35 @@ class RouteController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param TemplateRoute $route
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TemplateRoute $route)
     {
-        //
+        $template = $route->template;
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        // ensure that file is within template
+        $fileIDS = $template->files->pluck('id');
+        if (!$fileIDS->contains($request->get('file_id'))) {
+            return back()->withErrors(['File is not within the selected template']);
+        }
+
+        // ensure that route is unique to all routes within template
+        $routes = $template->routes->pluck('route');
+        if ($routes->contains($request->get('route'))) {
+            return back()->withErrors(['Route must be unique to this template, please select another route label']);
+        }
+
+        $route->route = $request->get('route');
+        $route->file_id = $request->get('file_id');
+        $route->save();
+
+        return redirect()->route('template.show', $template->id)->with('success', 'Route successfully updated');
     }
 
     /**
@@ -111,8 +134,10 @@ class RouteController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(TemplateRoute $route)
     {
-        //
+        $template = $route->template->id;
+        $route->delete();
+        return redirect()->route('template.show', $template)->with('success', 'Route deleted');
     }
 }
