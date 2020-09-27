@@ -68,6 +68,14 @@
 
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="{{ route('template.index') }}">Templates</a>
+
+                                    @if(isset($templates) && !$templates->isEmpty())
+                                    <div class="dropdown-divider"></div>
+
+                                        @foreach($templates as $template)
+                                        <a class="dropdown-item" href="{{ route('template.show', $template->id) }}">{{ $template->bank->name }}</a>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

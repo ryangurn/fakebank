@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Template;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layouts.app', function($view){
+            $templates = Template::all();
+            $view->with('templates', $templates);
+        });
     }
 }
