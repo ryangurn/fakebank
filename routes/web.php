@@ -20,16 +20,19 @@ Route::domain('fakebank.test')->group(function(){
 
     # get template routes
     $bank = Bank::where('settings->status', '=', 'true')->first();
-    $template = $bank->template;
-    $routes = $template->routes;
+    if($bank != null) {
+        $template = $bank->template;
+        if ($template != null) {
+            $routes = $template->routes;
 
-    foreach ($routes as $route) {
-        Route::get($route->route, function () use($route){
-            $view = explode(".", $route->file->storage);
-            return view('public.'.$route->template->resource.'.'.strtolower($route->file->type).'s.'.$view[0]);
-        });
+            foreach ($routes as $route) {
+                Route::get($route->route, function () use ($route) {
+                    $view = explode(".", $route->file->storage);
+                    return view('public.' . $route->template->resource . '.' . strtolower($route->file->type) . 's.' . $view[0]);
+                });
+            }
+        }
     }
-
 });
 
 Route::domain('admin.fakebank.test')->group(function(){
