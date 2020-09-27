@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Bank;
 use App\Template;
+use App\TemplateFile;
+use App\TemplateRoute;
+use App\TemplateVariable;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -156,6 +159,12 @@ class TemplateController extends Controller
      */
     public function destroy(Template $template)
     {
+        $variables = $template->variables->pluck('id');
+        TemplateVariable::destroy($variables);
+        $files = $template->files->pluck('id');
+        TemplateFile::destroy($files);
+        $routes = $template->routes->pluck('id');
+        TemplateRoute::destroy($routes);
         $template->delete();
         return redirect()->route('template.index')->with('success', 'Template Deleted!');
     }
