@@ -50,6 +50,7 @@ Route::domain('admin.fakebank.test')->group(function(){
 
             Route::group(['prefix' => 'route'], function() {
                Route::get('/{template}', 'RouteController@create')->name('route.create');
+               Route::post('/{template}', 'RouteController@store')->name('route.store');
             });
         });
 
