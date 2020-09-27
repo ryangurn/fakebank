@@ -28,7 +28,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <div class="float-left">Delete Variable: {{ $file->storage }}</div>
+                        <div class="float-left">Delete File: {{ $file->storage }}</div>
                     </div>
 
                     <div class="card-body">
