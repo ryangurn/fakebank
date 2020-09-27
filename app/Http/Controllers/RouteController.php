@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Template;
 use App\TemplateRoute;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -131,8 +132,9 @@ class RouteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param TemplateRoute $route
      * @return Response
+     * @throws Exception
      */
     public function destroy(TemplateRoute $route)
     {
