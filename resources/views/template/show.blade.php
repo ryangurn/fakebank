@@ -169,10 +169,10 @@
                                     <tr>
                                         <td>{{ $route->route }}</td>
                                         <td>{{ $route->file->storage  }}</td>
-{{--                                        <td>--}}
-{{--                                            <a href="{{ route('route.show', $route->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Route">[Show]</a>--}}
+                                        <td>
+                                            <a href="{{ route('route.show', $route->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Route">[Show]</a>
 {{--                                            <a href="{{ route('route.edit', $route->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Route">[Edit]</a>--}}
-{{--                                        </td>--}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else

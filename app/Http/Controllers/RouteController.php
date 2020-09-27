@@ -72,12 +72,12 @@ class RouteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param TemplateRoute $route
      * @return Response
      */
-    public function show($id)
+    public function show(TemplateRoute $route)
     {
-        //
+        return view('template.routes.show', compact('route'));
     }
 
     /**
