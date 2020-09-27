@@ -11,10 +11,25 @@
 |
 */
 
+use App\Bank;
+
 Route::domain('fakebank.test')->group(function(){
     Route::get('/', function () {
         return view('public.index');
     })->name('root');
+
+    # get template routes
+    $bank = Bank::where('settings->status', '=', 'true')->first();
+    $template = $bank->template;
+    $routes = $template->routes;
+
+    foreach ($routes as $route) {
+        Route::get($route->route, function () use($route){
+            $view = explode(".", $route->file->storage);
+            return view('public.'.$route->template->resource.'.'.strtolower($route->file->type).'s.'.$view[0]);
+        });
+    }
+
 });
 
 Route::domain('admin.fakebank.test')->group(function(){
