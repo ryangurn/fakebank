@@ -45,6 +45,6 @@ class Bank extends Model
     }
 
     public function template(){
-        return $this->hasOne(Template::class);
+        return $this->hasOne(Template::class, 'bank_id', 'id');
     }
 }
