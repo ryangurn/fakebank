@@ -83,12 +83,14 @@ class RouteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param TemplateRoute $route
      * @return Response
      */
-    public function edit($id)
+    public function edit(TemplateRoute $route)
     {
-        //
+        $template = $route->template;
+        $variables = ['form' => ['action' => route('template.update', $route->template->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        return view('template.routes.update', compact('route', 'variables', 'template'));
     }
 
     /**

@@ -52,6 +52,7 @@ Route::domain('admin.fakebank.test')->group(function(){
                Route::get('/{template}', 'RouteController@create')->name('route.create');
                Route::post('/{template}', 'RouteController@store')->name('route.store');
                Route::get('/show/{route}', 'RouteController@show')->name('route.show');
+               Route::get('/edit/{route}', 'RouteController@edit')->name('route.edit');
             });
         });
 
