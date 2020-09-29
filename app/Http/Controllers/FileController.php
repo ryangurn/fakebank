@@ -170,6 +170,11 @@ class FileController extends Controller
      */
     public function destroy(TemplateFile $file)
     {
+        # delete routes
+        foreach($file->routes as $route) {
+            $route->delete();
+        }
+
         $template = $file->template->id;
         File::delete(resource_path('views/public/'.$file->template->resource.'/'.strtolower($file->type).'s/'.$file->storage));
         $file->delete();
