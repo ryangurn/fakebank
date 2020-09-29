@@ -32,12 +32,14 @@ class PublicServiceProvider extends ServiceProvider
         });
 
         foreach ($bank->template->routes as $route) {
-            $view = explode(".", $route->file->storage);
-            view()->composer('public.' . $route->template->resource . '.' . strtolower($route->file->type) . 's.' . $view[0], function($view) use ($bank) {
-                foreach ($bank->template->variables as $variable) {
-                    $view->with($variable->variable, $variable->value);
-                }
-            });
+            if (isset($route->file) && $route->file != null) {
+                $view = explode(".", $route->file->storage);
+                view()->composer('public.' . $route->template->resource . '.' . strtolower($route->file->type) . 's.' . $view[0], function ($view) use ($bank) {
+                    foreach ($bank->template->variables as $variable) {
+                        $view->with($variable->variable, $variable->value);
+                    }
+                });
+            }
         }
     }
 }
