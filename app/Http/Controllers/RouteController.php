@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Template;
 use App\TemplateRoute;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class RouteController extends Controller
 {
@@ -26,7 +30,7 @@ class RouteController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Template $template
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function create(Template $template)
     {
@@ -39,7 +43,7 @@ class RouteController extends Controller
      *
      * @param Request $request
      * @param Template $template
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(Request $request, Template $template)
     {
@@ -85,7 +89,7 @@ class RouteController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param TemplateRoute $route
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function edit(TemplateRoute $route)
     {
@@ -99,7 +103,7 @@ class RouteController extends Controller
      *
      * @param Request $request
      * @param TemplateRoute $route
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, TemplateRoute $route)
     {
@@ -133,7 +137,7 @@ class RouteController extends Controller
      * Remove the specified resource from storage.
      *
      * @param TemplateRoute $route
-     * @return Response
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(TemplateRoute $route)

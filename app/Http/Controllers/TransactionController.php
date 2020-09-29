@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Account;
-use App\Bank;
 use App\Transaction;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class TransactionController extends Controller
 {
@@ -31,7 +35,7 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function index()
     {
@@ -43,7 +47,7 @@ class TransactionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function create()
     {
@@ -56,7 +60,7 @@ class TransactionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -78,7 +82,7 @@ class TransactionController extends Controller
      * Display the specified resource.
      *
      * @param Transaction $transaction
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function show(Transaction $transaction)
     {
@@ -89,7 +93,7 @@ class TransactionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Transaction $transaction
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function edit(Transaction $transaction)
     {
@@ -103,7 +107,7 @@ class TransactionController extends Controller
      *
      * @param Request $request
      * @param Transaction $transaction
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, Transaction $transaction)
     {
@@ -125,8 +129,8 @@ class TransactionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Transaction $transaction
-     * @return Response
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy(Transaction $transaction)
     {

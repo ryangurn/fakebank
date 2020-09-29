@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Template;
 use App\TemplateVariable;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class VariableController extends Controller
 {
@@ -28,7 +32,7 @@ class VariableController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Template $template
-     * @return void
+     * @return Application|Factory|View|void
      */
     public function create(Template $template)
     {
@@ -40,7 +44,7 @@ class VariableController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(Request $request, Template $template)
     {
@@ -78,7 +82,7 @@ class VariableController extends Controller
      * Display the specified resource.
      *
      * @param TemplateVariable $variable
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function show(TemplateVariable $variable)
     {
@@ -89,7 +93,7 @@ class VariableController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param TemplateVariable $variable
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function edit(TemplateVariable $variable)
     {
@@ -101,8 +105,8 @@ class VariableController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param TemplateVariable $variable
+     * @return RedirectResponse
      */
     public function update(Request $request, TemplateVariable $variable)
     {
@@ -139,7 +143,7 @@ class VariableController extends Controller
      * Remove the specified resource from storage.
      *
      * @param TemplateVariable $variable
-     * @return Response
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(TemplateVariable $variable)

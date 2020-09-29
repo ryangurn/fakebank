@@ -7,11 +7,11 @@ use App\Bank;
 use App\Transaction;
 use Exception;
 use Faker\Factory;
-use Faker\Generator;
-use Faker\Provider\Base;
-use Faker\Provider\Company;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class AccountController extends Controller
 {
@@ -51,7 +51,7 @@ class AccountController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Application|\Illuminate\Contracts\View\Factory|Response|View
      */
     public function index()
     {
@@ -62,7 +62,7 @@ class AccountController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|\Illuminate\Contracts\View\Factory|Response|View
      */
     public function create()
     {
@@ -75,7 +75,7 @@ class AccountController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -99,7 +99,7 @@ class AccountController extends Controller
      * Display the specified resource.
      *
      * @param Account $account
-     * @return Response
+     * @return Application|\Illuminate\Contracts\View\Factory|Response|View
      */
     public function show(Account $account)
     {
@@ -110,7 +110,7 @@ class AccountController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Account $account
-     * @return Response
+     * @return Application|\Illuminate\Contracts\View\Factory|Response|View
      */
     public function edit(Account $account)
     {
@@ -124,7 +124,7 @@ class AccountController extends Controller
      *
      * @param Request $request
      * @param Account $account
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, Account $account)
     {
@@ -147,7 +147,7 @@ class AccountController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Account $account
-     * @return Response
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(Account $account)
@@ -159,8 +159,9 @@ class AccountController extends Controller
     /**
      * Generate transactions given a specific account
      *
+     * @param Request $request
      * @param Account $account
-     * @return Response
+     * @return RedirectResponse
      */
     public function generateTransactions(Request $request, Account $account)
     {

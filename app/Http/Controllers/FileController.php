@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Template;
 use App\TemplateFile;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
+use Illuminate\View\View;
 
 class FileController extends Controller
 {
@@ -28,7 +32,7 @@ class FileController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Template $template
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function create(Template $template)
     {
@@ -41,7 +45,7 @@ class FileController extends Controller
      *
      * @param Request $request
      * @param Template $template
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(Request $request, Template $template)
     {
@@ -94,7 +98,7 @@ class FileController extends Controller
      * Display the specified resource.
      *
      * @param TemplateFile $file
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function show(TemplateFile $file)
     {
@@ -105,7 +109,7 @@ class FileController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param TemplateFile $file
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function edit(TemplateFile $file)
     {
@@ -118,7 +122,7 @@ class FileController extends Controller
      *
      * @param Request $request
      * @param TemplateFile $file
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, TemplateFile $file)
     {
@@ -166,7 +170,7 @@ class FileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param TemplateFile $file
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(TemplateFile $file)
     {

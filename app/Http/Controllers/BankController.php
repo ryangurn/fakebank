@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Bank;
-use App\Transaction;
 use Exception;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class BankController extends Controller
@@ -63,7 +62,7 @@ class BankController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -123,7 +122,7 @@ class BankController extends Controller
      *
      * @param Request $request
      * @param Bank $bank
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, Bank $bank)
     {
@@ -145,7 +144,7 @@ class BankController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Bank $bank
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(Bank $bank)
@@ -157,7 +156,7 @@ class BankController extends Controller
     /**
      * @param Request $request
      * @param Bank $bank
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function status(Request $request, Bank $bank){
         $validator = validator($request->all(), [
