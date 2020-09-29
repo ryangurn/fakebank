@@ -50,7 +50,7 @@
                             <tr>
                                 <th>{{ __('Bank ') }}</th>
                                 <th>{{ __('Resource') }}</th>
-                                <th>{{ __('Variables') }}</th>
+                                <th>{{ __('Stats') }}</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -60,7 +60,11 @@
                                     <tr>
                                         <td>{{ $template->bank->name  }}</td>
                                         <td>{{ $template->resource  }}</td>
-                                        <td><span class="badge badge-pill badge-success">{{ $template->variables->count()  }}</span></td>
+                                        <td>
+                                            <span class="badge badge-pill badge-success" data-toggle="tooltip" title="{{ $template->variables->count() }} {{ \Illuminate\Support\Str::plural('variable', $template->variables->count()) }}">{{ $template->variables->count()  }}</span>
+                                            <span class="badge badge-pill badge-primary" data-toggle="tooltip" title="{{ $template->routes->count() }} {{ \Illuminate\Support\Str::plural('route', $template->routes->count()) }}">{{ $template->routes->count()  }}</span>
+                                            <span class="badge badge-pill badge-secondary" data-toggle="tooltip" title="{{ $template->files->count() }} {{ \Illuminate\Support\Str::plural('file', $template->files->count()) }}">{{ $template->files->count()  }}</span>
+                                        </td>
                                         <td>
                                             <a href="{{ route('template.show', $template->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show Template">[Show]</a>
                                             <a href="{{ route('template.edit', $template->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit Template">[Edit]</a>
