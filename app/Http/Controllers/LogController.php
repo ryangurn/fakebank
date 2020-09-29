@@ -21,7 +21,8 @@ class LogController extends Controller
         $logs = Activity::orderBy('created_at', 'desc')->paginate(15);
         $statistics = [];
 
-        foreach($logs->pluck('log_name')->unique() as $item) {
+        $allLogs = Activity::all();
+        foreach($allLogs->pluck('log_name')->unique() as $item) {
             $statistics[$item] = Activity::where('log_name', $item)->get()->count();
         }
 
