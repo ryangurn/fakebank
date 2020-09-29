@@ -18,7 +18,7 @@ class LogController extends Controller
      * @return Application|Factory|View
      */
     public function index() {
-        $logs = Activity::orderBy('created_at', 'desc')->get();
+        $logs = Activity::orderBy('created_at', 'desc')->paginate(15);
         $statistics = [];
 
         foreach($logs->pluck('log_name')->unique() as $item) {
