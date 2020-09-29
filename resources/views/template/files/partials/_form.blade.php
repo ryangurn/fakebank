@@ -15,7 +15,7 @@
 
         <div class="form-group">
             <label for="file">File</label>
-            @if(!isset($file) && $file->storage == "")
+            @if(!isset($file) || $file->storage == "")
             <input name="file" type="file" class="form-control-file" id="file">
             @else
                <p><u>{{ 'resources/views/public/'.$file->template->resource.'/'.strtolower($file->type).'s/'.$file->storage }}</u></p>
