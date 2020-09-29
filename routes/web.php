@@ -39,8 +39,14 @@ Route::domain('admin.fakebank.test')->group(function(){
     Auth::routes();
 
     Route::group(['middleware' => 'auth'], function() {
-        Route::group(['prefix' => 'log'], function() {
-            Route::get('/', 'LogController@index')->name('log.index');
+        Route::group(['prefix' => 'admin'], function() {
+            Route::group(['prefix' => 'user'], function() {
+                Route::get('/', 'UserController@index')->name('user.index');
+            });
+
+            Route::group(['prefix' => 'log'], function() {
+                Route::get('/', 'LogController@index')->name('log.index');
+            });
         });
 
         Route::group(['prefix' => 'template'], function() {
