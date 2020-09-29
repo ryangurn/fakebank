@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\File;
 class FileController extends Controller
 {
     public $validator = [
-        'file' => 'required|file|mimes:php,html',
+        'file' => 'required|file',
         'purpose' => 'required|numeric|in:0,1,2',
     ];
 
@@ -49,6 +49,11 @@ class FileController extends Controller
 
         if ($validator->fails()) {
             return back()->withErrors($validator);
+        }
+
+        $explode = explode(".", $request->file->getClientOriginalName());
+        if ($explode[count($explode)-1] != "php" || $explode[count($explode)-2] != "blade") {
+            return back()->withErrors(['Please upload a valid blade file']);
         }
 
         if (!is_dir(resource_path('views/public/'.$template->resource))) {
