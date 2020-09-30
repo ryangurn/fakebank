@@ -36,9 +36,9 @@ Route::domain('fakebank.test')->group(function(){
 });
 
 Route::domain('admin.fakebank.test')->group(function(){
-    Auth::routes();
+    Auth::routes(['verify' => true]);
 
-    Route::group(['middleware' => 'auth'], function() {
+    Route::group(['middleware' => ['auth', 'verified']], function() {
         Route::group(['prefix' => 'admin'], function() {
             Route::group(['prefix' => 'user'], function() {
                 Route::get('/', 'UserController@index')->name('user.index');
