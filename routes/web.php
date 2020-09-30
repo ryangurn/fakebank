@@ -43,6 +43,7 @@ Route::domain('admin.fakebank.test')->group(function(){
             Route::group(['prefix' => 'user'], function() {
                 Route::get('/', 'UserController@index')->name('user.index');
                 Route::get('/create', 'UserController@create')->name('user.create');
+                Route::get('/{user}', 'UserController@show')->name('user.show');
             });
 
             Route::group(['prefix' => 'log'], function() {
