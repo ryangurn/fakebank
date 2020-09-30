@@ -26,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $variables = ['form' => ['action' => route('user.store'), 'method' => 'POST']];
+        return view('user.create', compact('variables'));
     }
 
     /**
