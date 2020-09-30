@@ -13,7 +13,11 @@
             <input type="email" id="email" name="email" class="form-control" placeholder="Email" @if(isset($user) && $user->email != null) value="{{ $user->email  }}" @endif />
         </div>
 
-        <div class="alert alert-warning">Password will be randomly generated and emailed directly to the new user, if needed it can be reset.</div>
+        @if(!isset($variables['form']['hidden']))
+            <div class="alert alert-warning">Password will be randomly generated and emailed directly to the new user, if needed it can be reset.</div>
+        @else
+            <div class="alert alert-warning">Password will will not be changed in making any modifications to name or email.</div>
+        @endif
 
         <div class="form-group">
             @if(!isset($variables['form']['hidden']))
