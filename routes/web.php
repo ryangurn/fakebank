@@ -45,6 +45,11 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::get('/create', 'UserController@create')->name('user.create');
                 Route::post('/', 'UserController@store')->name('user.store');
                 Route::get('/{user}', 'UserController@show')->name('user.show');
+                Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
+                Route::put('/{user}', 'UserController@update')->name('user.update');
+                Route::delete('/{user}', 'UserController@destroy')->name('user.destroy');
+
+                Route::put('/reset/{user}', 'UserController@reset')->name('user.reset');
             });
 
             Route::group(['prefix' => 'log'], function() {

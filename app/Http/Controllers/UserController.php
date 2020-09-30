@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\SendNewPassword;
 use App\Notifications\SendTemporaryPassword;
 use App\User;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -16,20 +20,21 @@ class UserController extends Controller
 {
     public $validator = [
         'name' => 'required|alphadash',
-        'email' => 'required|email'
+        'email' => 'required|email|unique:users,email'
     ];
 
     public $messages = [
         'name.required' => 'A name is required',
         'name.alphadash' => 'Alpha numeric characters only (including dash and underscore)',
         'email.required' => 'An email is required',
-        'email.email' => 'Please provide a valid email'
+        'email.email' => 'Please provide a valid email',
+        'email.unique' => 'That email address cannot be used, please try another one.'
     ];
 
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Application|Factory|Response|View
      */
     public function index()
     {
@@ -52,7 +57,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -72,8 +77,14 @@ class UserController extends Controller
             'password' => Hash::make($tmpPassword)
         ]);
 
+        # TODO: Update temporary password column(s)/table(s)
 
         # send email with password
+        activity('user')
+            ->causedBy(Auth::user())
+            ->performedOn($user)
+            ->log('sent temporary password');
+
         $user->notify(new SendTemporaryPassword($tmpPassword));
         $user->sendEmailVerificationNotification();
 
@@ -94,34 +105,74 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param User $user
+     * @return Application|Factory|Response|View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $variables = ['form' => ['action' => route('user.update', $user->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        return view('user.update', compact('user', 'variables'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param User $user
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $user->name = $request->get('name');
+
+        if ($user->email != $request->get('email')) {
+            $user->email = $request->get('email');
+            $user->email_verified_at = null;
+            $user->sendEmailVerificationNotification();
+        }
+
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', 'User Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param User $user
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'User Deleted');
+    }
+
+    /**
+     * @param User $user
+     */
+    public function reset(User $user)
+    {
+        activity('user')
+            ->causedBy(Auth::user())
+            ->performedOn($user)
+            ->log('reset password');
+
+        # generate password
+        $tmpPassword = Str::random(16);
+
+        $user->password = Hash::make($tmpPassword);
+        $user->save();
+
+        $user->notify(new SendNewPassword($tmpPassword));
+
+        return redirect()->route('user.index')->with('success', 'A password reset has been sent');
     }
 }
