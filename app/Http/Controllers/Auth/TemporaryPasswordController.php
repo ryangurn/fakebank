@@ -48,6 +48,11 @@ class TemporaryPasswordController extends Controller
         $user->temporary_password = false;
         $user->save();
 
+        activity('user')
+            ->causedBy($user->id)
+            ->performedOn($user)
+            ->log('password reset');
+
         return redirect()->route('admin.home')->with('success', 'Password changed, keep it safe');
 
     }
