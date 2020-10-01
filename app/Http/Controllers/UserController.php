@@ -74,7 +74,8 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => Hash::make($tmpPassword)
+            'password' => Hash::make($tmpPassword),
+            'temporary_password' => false
         ]);
 
         # TODO: Update temporary password column(s)/table(s)
@@ -169,6 +170,7 @@ class UserController extends Controller
         $tmpPassword = Str::random(16);
 
         $user->password = Hash::make($tmpPassword);
+        $user->temporary_password = true;
         $user->save();
 
         $user->notify(new SendNewPassword($tmpPassword));
