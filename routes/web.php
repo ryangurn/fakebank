@@ -37,8 +37,10 @@ Route::domain('fakebank.test')->group(function(){
 
 Route::domain('admin.fakebank.test')->group(function(){
     Auth::routes(['verify' => true]);
+    Route::get('/temporary_password', 'Auth\\TemporaryPasswordController@show')->name('auth.temporary');
+    Route::post('/temporary_password', 'Auth\\TemporaryPasswordController@change')->name('auth.change');
 
-    Route::group(['middleware' => ['auth', 'verified']], function() {
+    Route::group(['middleware' => ['auth', 'verified', 'temporary']], function() {
         Route::group(['prefix' => 'admin'], function() {
             Route::group(['prefix' => 'user'], function() {
                 Route::get('/', 'UserController@index')->name('user.index');
