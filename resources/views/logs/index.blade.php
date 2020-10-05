@@ -36,7 +36,7 @@
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#activity_{{ $activity->id }}" aria-expanded="true" aria-controls="collapseOne">
                                     <span class="float-left">
-                                        <b>{{ $activity->causer->name }}</b> {{ $activity->description }} {{ \Illuminate\Support\Str::singular($activity->log_name)  }}</b>
+                                        <b>@if($activity->causer_id != null){{ $activity->causer->name }}@else{{ 'Unknown' }}@endif</b> {{ $activity->description }} {{ \Illuminate\Support\Str::singular($activity->log_name)  }}</b>
                                     </span>
                                     <span class="float-right">
                                         <span class="badge @if($activity->description == "created") badge-success @elseif($activity->description == "updated") badge-warning @elseif($activity->description == "deleted") badge-danger @else badge-primary @endif">{{ $activity->created_at->diffForHumans()  }}</span>
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2"><span class="badge badge-light">Causer</span></div>
-                                        <div class="col-md-10">{{ $activity->causer->name }}</div>
+                                        <div class="col-md-10">@if($activity->causer_id != null){{ $activity->causer->name }}@else{{ 'Unknown' }}@endif</div>
                                     </div>
                                     @if(isset(json_decode($activity->changes())->attributes) && json_decode($activity->changes())->attributes != null)
                                         <div class="row">
