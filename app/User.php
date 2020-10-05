@@ -11,7 +11,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, LogsActivity;
 
-    protected static $logFillable = true;
+    protected static $logUnguarded = true;
     protected static $logName = 'user';
 
     /**
@@ -28,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $hidden = [
+    protected $guarded = [
         'password', 'remember_token',
     ];
 
