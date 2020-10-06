@@ -14,14 +14,18 @@
                     </div>
 
                     <div class="card-body">
-                        <p>
-                            @if($permission->roles != null && !$permission->roles->isEmpty())
+                        @if($permission->roles != null && !$permission->roles->isEmpty())
+                        <div class="row">
+                            <div class="col-md-2"><span class="badge badge-primary">Assigned to roles</span></div>
+                            <div class="col-md-10">{{ implode(", ", $permission->roles->pluck('name')->toArray()) }}</div>
+                        </div>
+                        @endif
+                        @if(\App\PermissionMeta::where('permission_id', '=', $permission->id)->first() != null)
                             <div class="row">
-                                <div class="col-md-2"><span class="badge badge-primary">Assigned to roles</span></div>
-                                <div class="col-md-10">{{ implode(", ", $permission->roles->pluck('name')->toArray()) }}</div>
+                                <div class="col-md-2"><span class="badge badge-primary">Description</span></div>
+                                <div class="col-md-10">{{ \App\PermissionMeta::where('permission_id', '=', $permission->id)->first()->description }}</div>
                             </div>
-                            @endif
-                        </p>
+                        @endif
                     </div>
                 </div>
             </div>

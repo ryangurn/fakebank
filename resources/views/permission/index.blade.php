@@ -18,6 +18,7 @@
                                         <h5 class="card-title">{{ $permission->name }}</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">{{ $permission->guard_name }}</h6>
                                         @if($permission->roles != null && !$permission->roles->isEmpty())<p class="card-text">Roles: {{ implode(", ", $permission->roles->pluck('name')->toArray()) }}</p>@endif
+                                        @if(\App\PermissionMeta::where('permission_id', '=', $permission->id)->first() != null)<p class="card-text">{{ \App\PermissionMeta::where('permission_id', '=', $permission->id)->first()->description }}</p>@endif
                                         <a href="{{ route('permission.show', $permission->id) }}" class="card-link badge-pill badge-primary" data-toggle="tooltip" title="Show Permission: {{ $permission->name }}">[Show]</a>
                                     </div>
                                 </div>
