@@ -54,6 +54,10 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::put('/reset/{user}', 'UserController@reset')->name('user.reset');
             });
 
+            Route::group(['prefix' => 'permission'], function() {
+                Route::get('/', 'PermissionController@index')->name('permission.index');
+            });
+
             Route::group(['prefix' => 'log'], function() {
                 Route::get('/', 'LogController@index')->name('log.index');
             });

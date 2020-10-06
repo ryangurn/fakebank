@@ -97,6 +97,7 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="{{ route('log.index') }}">Logs</a>
                                     <a class="dropdown-item" href="{{ route('user.index') }}">Users</a>
+                                    <a class="dropdown-item" href="{{ route('permission.index') }}">Permissions</a>
                                 </div>
                             </li>
 
