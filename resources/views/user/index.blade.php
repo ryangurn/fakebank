@@ -48,7 +48,7 @@
                                         <td>
                                             <a href="{{ route('user.show', $user->id) }}" class="badge-pill badge-primary" data-toggle="tooltip" title="Show User">[Show]</a>
                                             <a href="{{ route('user.edit', $user->id) }}" class="badge-pill badge-warning" data-toggle="tooltip" title="Edit User">[Edit]</a>
-{{--                                            <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_template_{{ $template->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>--}}
+                                            <a href="#" class="badge-pill badge-danger" data-backdrop="true" data-toggle="modal" data-target="#activity_user_{{ $user->id }}" data-toggle="tooltip" title="Activity Log">[Logs]</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -67,5 +67,5 @@
 @endsection
 
 @section('modal')
-
+    @include('user.partials._log_modal')
 @endsection
