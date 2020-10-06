@@ -56,6 +56,7 @@ Route::domain('admin.fakebank.test')->group(function(){
 
             Route::group(['prefix' => 'permission'], function() {
                 Route::get('/', 'PermissionController@index')->name('permission.index');
+                Route::get('/{permission}', 'PermissionController@show')->name('permission.show');
             });
 
             Route::group(['prefix' => 'log'], function() {
