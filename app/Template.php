@@ -3,14 +3,25 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * Class Template
+ * @package App
+ */
 class Template extends Model
 {
     use LogsActivity;
 
+    /**
+     * @var bool
+     */
     protected static $logFillable = true;
+    /**
+     * @var string
+     */
     protected static $logName = 'template';
 
     /**
@@ -42,19 +53,32 @@ class Template extends Model
     /**
      * @return HasOne
      */
-    public function bank() {
+    public function bank(): HasOne
+    {
         return $this->hasOne(Bank::class, 'id', 'bank_id');
     }
 
-    public function variables() {
+    /**
+     * @return HasMany
+     */
+    public function variables(): HasMany
+    {
         return $this->hasMany(TemplateVariable::class, 'template_id', 'id');
     }
 
-    public function files() {
+    /**
+     * @return HasMany
+     */
+    public function files(): HasMany
+    {
         return $this->hasMany(TemplateFile::class, 'template_id', 'id');
     }
 
-    public function routes() {
+    /**
+     * @return HasMany
+     */
+    public function routes(): HasMany
+    {
         return $this->hasMany(TemplateRoute::class, 'template_id', 'id');
     }
 }

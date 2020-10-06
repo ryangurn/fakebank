@@ -40,14 +40,16 @@ class TemplateRoute extends Model
     /**
      * @return HasOne
      */
-    public function template() {
+    public function template(): HasOne
+    {
         return $this->hasOne(Template::class, 'id', 'template_id');
     }
 
     /**
      * @return HasOne
      */
-    public function file() {
+    public function file(): HasOne
+    {
         return $this->hasOne(TemplateFile::class, 'id', 'file_id');
     }
 }

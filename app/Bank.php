@@ -3,13 +3,25 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * Class Bank
+ * @package App
+ */
 class Bank extends Model
 {
     use LogsActivity;
 
+    /**
+     * @var bool
+     */
     protected static $logFillable = true;
+    /**
+     * @var string
+     */
     protected static $logName = 'bank';
 
     /**
@@ -40,11 +52,19 @@ class Bank extends Model
         'settings' => 'array'
     ];
 
-    public function accounts(){
+    /**
+     * @return HasMany
+     */
+    public function accounts(): HasMany
+    {
         return $this->hasMany(Account::class);
     }
 
-    public function template(){
+    /**
+     * @return HasOne
+     */
+    public function template(): HasOne
+    {
         return $this->hasOne(Template::class, 'bank_id', 'id');
     }
 }

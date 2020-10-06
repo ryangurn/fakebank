@@ -14,14 +14,14 @@ class TemplateVariable extends Model
 {
     use LogsActivity;
 
+    /**
+     * @var bool
+     */
     protected static $logFillable = true;
-    protected static $logName;
-
-    public function __construct(array $attributes = [])
-    {
-        self::$logName = env('ACTIVITY_LOGGER_TEMPLATE', 'template');
-        parent::__construct($attributes);
-    }
+    /**
+     * @var string
+     */
+    protected static $logName = 'template';
 
     /**
      * its good to be explicit, also i think
@@ -42,7 +42,12 @@ class TemplateVariable extends Model
         'executable'
     ];
 
-    public function getExecutableAttribute($value) {
+    /**
+     * @param $value
+     * @return string
+     */
+    public function getExecutableAttribute($value): string
+    {
         switch ($value){
             case 1:
                 return "True";
@@ -56,7 +61,8 @@ class TemplateVariable extends Model
      * variable and template
      * @return HasOne
      */
-    public function template() {
+    public function template(): HasOne
+    {
         return $this->hasOne(Template::class, 'id', 'template_id');
     }
 }
