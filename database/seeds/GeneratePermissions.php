@@ -1,5 +1,6 @@
 <?php
 
+use App\PermissionMeta;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Database\Seeder;
@@ -35,6 +36,15 @@ class GeneratePermissions extends Seeder
         $user_delete = Permission::firstOrCreate(['name' => 'delete user']);
         $user_access = Permission::firstOrCreate(['name' => 'access user']);
         $user_tmp = Permission::firstOrCreate(['name' => 'send temporary password']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $user_create->id, 'description' => 'The ability to create a new user']);
+        PermissionMeta::firstOrCreate(['permission_id' => $user_read->id, 'description' => 'The ability to view a users information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $user_update->id, 'description' => 'The ability to update users']);
+        PermissionMeta::firstOrCreate(['permission_id' => $user_delete->id, 'description' => 'The ability to delete users']);
+        PermissionMeta::firstOrCreate(['permission_id' => $user_access->id, 'description' => 'The ability to view the logs for a user']);
+        PermissionMeta::firstOrCreate(['permission_id' => $user_tmp->id, 'description' => 'The ability to issue a temporary password']);
+
         // user assignments
         // admin
         $adminArr[] = $user_create;
@@ -56,6 +66,15 @@ class GeneratePermissions extends Seeder
         $bank_delete = Permission::firstOrCreate(['name' => 'delete bank']);
         $bank_access = Permission::firstOrCreate(['name' => 'access bank']);
         $bank_activate = Permission::firstOrCreate(['name' => 'activate bank']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $bank_create->id, 'description' => 'The ability to create a new bank']);
+        PermissionMeta::firstOrCreate(['permission_id' => $bank_read->id, 'description' => 'The ability to view a banks information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $bank_update->id, 'description' => 'The ability to update banks']);
+        PermissionMeta::firstOrCreate(['permission_id' => $bank_delete->id, 'description' => 'The ability to delete banks']);
+        PermissionMeta::firstOrCreate(['permission_id' => $bank_access->id, 'description' => 'The ability to view the logs for a bank']);
+        PermissionMeta::firstOrCreate(['permission_id' => $bank_activate->id, 'description' => 'The ability to activate/de-activate a bank']);
+
         // bank assignments
         // admin
         $adminArr[] = $bank_create;
@@ -83,6 +102,15 @@ class GeneratePermissions extends Seeder
         $account_delete = Permission::firstOrCreate(['name' => 'delete account']);
         $account_access = Permission::firstOrCreate(['name' => 'access account']);
         $account_generate = Permission::firstOrCreate(['name' => 'generate transactions']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $account_create->id, 'description' => 'The ability to create a new account']);
+        PermissionMeta::firstOrCreate(['permission_id' => $account_read->id, 'description' => 'The ability to view a accounts information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $account_update->id, 'description' => 'The ability to update accounts']);
+        PermissionMeta::firstOrCreate(['permission_id' => $account_delete->id, 'description' => 'The ability to delete accounts']);
+        PermissionMeta::firstOrCreate(['permission_id' => $account_access->id, 'description' => 'The ability to view the logs for a account']);
+        PermissionMeta::firstOrCreate(['permission_id' => $account_generate->id, 'description' => 'The ability to generate transactions for an account']);
+
         // account assignments
         // admin
         $adminArr[] = $account_create;
@@ -109,6 +137,14 @@ class GeneratePermissions extends Seeder
         $transaction_update = Permission::firstOrCreate(['name' => 'update transaction']);
         $transaction_delete = Permission::firstOrCreate(['name' => 'delete transaction']);
         $transaction_access = Permission::firstOrCreate(['name' => 'access transaction']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $transaction_create->id, 'description' => 'The ability to create a new transaction']);
+        PermissionMeta::firstOrCreate(['permission_id' => $transaction_read->id, 'description' => 'The ability to view a transactions information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $transaction_update->id, 'description' => 'The ability to update transactions']);
+        PermissionMeta::firstOrCreate(['permission_id' => $transaction_delete->id, 'description' => 'The ability to delete transactions']);
+        PermissionMeta::firstOrCreate(['permission_id' => $transaction_access->id, 'description' => 'The ability to view the logs for a transaction']);
+
         // transaction assignments
         // admin
         $adminArr[] = $transaction_create;
@@ -134,6 +170,14 @@ class GeneratePermissions extends Seeder
         $template_update = Permission::firstOrCreate(['name' => 'update template']);
         $template_delete = Permission::firstOrCreate(['name' => 'delete template']);
         $template_access = Permission::firstOrCreate(['name' => 'access template']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $template_create->id, 'description' => 'The ability to create a new template']);
+        PermissionMeta::firstOrCreate(['permission_id' => $template_read->id, 'description' => 'The ability to view a templates information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $template_update->id, 'description' => 'The ability to update templates']);
+        PermissionMeta::firstOrCreate(['permission_id' => $template_delete->id, 'description' => 'The ability to delete templates']);
+        PermissionMeta::firstOrCreate(['permission_id' => $template_access->id, 'description' => 'The ability to view the logs for a template']);
+
         // template assignments
         // admin
         $adminArr[] = $template_create;
@@ -156,6 +200,14 @@ class GeneratePermissions extends Seeder
         $variable_update = Permission::firstOrCreate(['name' => 'update variable']);
         $variable_delete = Permission::firstOrCreate(['name' => 'delete variable']);
         $variable_access = Permission::firstOrCreate(['name' => 'access variable']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $variable_create->id, 'description' => 'The ability to create a new variable']);
+        PermissionMeta::firstOrCreate(['permission_id' => $variable_read->id, 'description' => 'The ability to view a variables information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $variable_update->id, 'description' => 'The ability to update variables']);
+        PermissionMeta::firstOrCreate(['permission_id' => $variable_delete->id, 'description' => 'The ability to delete variables']);
+        PermissionMeta::firstOrCreate(['permission_id' => $variable_access->id, 'description' => 'The ability to view the logs for a variable']);
+
         // variable assignments
         // admin
         $adminArr[] = $variable_create;
@@ -179,6 +231,14 @@ class GeneratePermissions extends Seeder
         $route_update = Permission::firstOrCreate(['name' => 'update route']);
         $route_delete = Permission::firstOrCreate(['name' => 'delete route']);
         $route_access = Permission::firstOrCreate(['name' => 'access route']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $route_create->id, 'description' => 'The ability to create a new route']);
+        PermissionMeta::firstOrCreate(['permission_id' => $route_read->id, 'description' => 'The ability to view a routes information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $route_update->id, 'description' => 'The ability to update routes']);
+        PermissionMeta::firstOrCreate(['permission_id' => $route_delete->id, 'description' => 'The ability to delete routes']);
+        PermissionMeta::firstOrCreate(['permission_id' => $route_access->id, 'description' => 'The ability to view the logs for a route']);
+
         // route assignments
         // admin
         $adminArr[] = $route_create;
@@ -201,6 +261,14 @@ class GeneratePermissions extends Seeder
         $file_read = Permission::firstOrCreate(['name' => 'read file']);
         $file_delete = Permission::firstOrCreate(['name' => 'delete file']);
         $file_access = Permission::firstOrCreate(['name' => 'access file']);
+
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $file_create->id, 'description' => 'The ability to create a new file']);
+        PermissionMeta::firstOrCreate(['permission_id' => $file_update->id, 'description' => 'The ability to view a files information']);
+        PermissionMeta::firstOrCreate(['permission_id' => $file_read->id, 'description' => 'The ability to update files']);
+        PermissionMeta::firstOrCreate(['permission_id' => $file_delete->id, 'description' => 'The ability to delete files']);
+        PermissionMeta::firstOrCreate(['permission_id' => $file_access->id, 'description' => 'The ability to view the logs for a file']);
+
         // file assignments
         // admin
         $adminArr[] = $file_create;
@@ -219,6 +287,9 @@ class GeneratePermissions extends Seeder
         // reporter - (none)
 
         $log_access = Permission::firstOrCreate(['name' => 'access log']);
+        // descriptions
+        PermissionMeta::firstOrCreate(['permission_id' => $log_access->id, 'description' => 'The ability to view the logs for the entire system']);
+
         // log assignments
         // admin
         $adminArr[] = $log_access;
