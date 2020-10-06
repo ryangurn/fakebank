@@ -16,6 +16,7 @@ class GeneratePermissions extends Seeder
         // arrays
         $adminArr = []; // fakebank administrator
         $staffArr = []; // fakebank it staff
+        $editorArr = []; // fakebank template editor
 
         // get roles for assignment
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -43,6 +44,7 @@ class GeneratePermissions extends Seeder
         $staffArr [] = $user_read;
         $staffArr [] = $user_access;
         $staffArr [] = $user_tmp;
+        // editor - (none)
 
         $bank_create = Permission::firstOrCreate(['name' => 'create bank']);
         $bank_read = Permission::firstOrCreate(['name' => 'read bank']);
@@ -65,6 +67,9 @@ class GeneratePermissions extends Seeder
         $staffArr [] = $bank_delete;
         $staffArr [] = $bank_access;
         $staffArr [] = $bank_activate;
+        // editor
+        $editorArr [] = $bank_read;
+        $editorArr [] = $bank_activate;
 
 
         $account_create = Permission::firstOrCreate(['name' => 'create account']);
@@ -88,6 +93,8 @@ class GeneratePermissions extends Seeder
         $staffArr [] = $account_delete;
         $staffArr [] = $account_access;
         $staffArr [] = $account_generate;
+        // editor
+        $editorArr [] = $account_read;
 
         $transaction_create = Permission::firstOrCreate(['name' => 'create transaction']);
         $transaction_read = Permission::firstOrCreate(['name' => 'read transaction']);
@@ -107,6 +114,8 @@ class GeneratePermissions extends Seeder
         $staffArr [] = $transaction_update;
         $staffArr [] = $transaction_delete;
         $staffArr [] = $transaction_access;
+        // editor
+        $editorArr [] = $transaction_read;
 
 
         $template_create = Permission::firstOrCreate(['name' => 'create template']);
@@ -124,6 +133,11 @@ class GeneratePermissions extends Seeder
         // staff
         $staffArr [] = $template_read;
         $staffArr [] = $template_access;
+        // editor
+        $editorArr [] = $template_create;
+        $editorArr [] = $template_read;
+        $editorArr [] = $template_update;
+        $editorArr [] = $template_delete;
 
         $variable_create = Permission::firstOrCreate(['name' => 'create variable']);
         $variable_read = Permission::firstOrCreate(['name' => 'read variable']);
@@ -140,6 +154,11 @@ class GeneratePermissions extends Seeder
         // staff
         $staffArr [] = $variable_read;
         $staffArr [] = $variable_access;
+        // editor
+        $editorArr [] = $variable_create;
+        $editorArr [] = $variable_read;
+        $editorArr [] = $variable_update;
+        $editorArr [] = $variable_delete;
 
         $route_create = Permission::firstOrCreate(['name' => 'create route']);
         $route_read = Permission::firstOrCreate(['name' => 'read route']);
@@ -156,6 +175,11 @@ class GeneratePermissions extends Seeder
         // staff
         $staffArr [] = $route_read;
         $staffArr [] = $route_access;
+        // editor
+        $editorArr [] = $route_create;
+        $editorArr [] = $route_read;
+        $editorArr [] = $route_update;
+        $editorArr [] = $route_delete;
 
         $file_create = Permission::firstOrCreate(['name' => 'create file']);
         $file_update = Permission::firstOrCreate(['name' => 'update file']);
@@ -172,6 +196,11 @@ class GeneratePermissions extends Seeder
         // staff
         $staffArr [] = $file_read;
         $staffArr [] = $file_access;
+        // editor
+        $editorArr [] = $file_create;
+        $editorArr [] = $file_update;
+        $editorArr [] = $file_read;
+        $editorArr [] = $file_delete;
 
         $log_access = Permission::firstOrCreate(['name' => 'access log']);
         // log assignments
