@@ -18,6 +18,8 @@ class GeneratePermissions extends Seeder
         $staffArr = []; // fakebank it staff
         $editorArr = []; // fakebank template editor
         $reporterArr = []; // fakebank report proofer
+        $customerArr = []; // access to the normal customer facing side
+        $bankerArr = []; // fake support representative for the active bank
 
         // get roles for assignment
         $admin = Role::firstOrCreate(['name' => 'admin']);
@@ -99,6 +101,8 @@ class GeneratePermissions extends Seeder
         // editor
         $editorArr [] = $account_read;
         // reporter - (none)
+        // banker
+        $bankerArr [] = $account_read;
 
         $transaction_create = Permission::firstOrCreate(['name' => 'create transaction']);
         $transaction_read = Permission::firstOrCreate(['name' => 'read transaction']);
@@ -121,6 +125,8 @@ class GeneratePermissions extends Seeder
         // editor
         $editorArr [] = $transaction_read;
         // reporter - (none)
+        // banker
+        $bankerArr [] = $transaction_read;
 
 
         $template_create = Permission::firstOrCreate(['name' => 'create template']);
@@ -226,5 +232,7 @@ class GeneratePermissions extends Seeder
         $staff->syncPermissions($staffArr);
         $editor->syncPermissions($editorArr);
         $reporter->syncPermissions($reporterArr);
+        $customer->syncPermissions($customerArr);
+        $banker->syncPermissions($bankerArr);
     }
 }
