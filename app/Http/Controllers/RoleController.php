@@ -62,7 +62,7 @@ class RoleController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validator = validator($request->all(), $this->validator, $this->messages);
 
@@ -100,11 +100,10 @@ class RoleController extends Controller
      * Display the specified resource.
      *
      * @param Role $role
-     * @return void
+     * @return Application|Factory|View
      */
     public function show(Role $role)
     {
-
         return view('role.show', compact('role'));
     }
 }
