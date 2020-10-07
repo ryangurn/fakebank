@@ -12,12 +12,12 @@
 
     <div class="form-group">
         <label for="name">Short Description</label>
-        <input id="description" class="form-control" name="description" placeholder="Short Description" @if(isset($role) && $role->description != null) value="{{ $role->description  }}" @endif />
+        <input id="description" class="form-control" name="description" placeholder="Short Description" @if(isset($role->id) && \App\RoleMeta::where('role_id', '=', $role->id)->first()->description != null) value="{{ \App\RoleMeta::where('role_id', '=', $role->id)->first()->description  }}" @endif />
     </div>
 
     <div class="form-group">
         <label for="name">Long Description</label>
-        <input id="long" class="form-control" name="long" placeholder="Long Description" @if(isset($role) && $role->long != null) value="{{ $role->long  }}" @endif />
+        <input id="long" class="form-control" name="long" placeholder="Long Description" @if(isset($role->id) && \App\RoleMeta::where('role_id', '=', $role->id)->first()->long != null) value="{{ \App\RoleMeta::where('role_id', '=', $role->id)->first()->long  }}" @endif />
     </div>
 
     <div class="form-group">

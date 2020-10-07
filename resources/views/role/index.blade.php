@@ -24,6 +24,7 @@
 {{--                                        @if($role->permissions != null && !$role->permissions->isEmpty())<p class="card-text">Roles: {{ implode(", ", $role->permissions->pluck('name')->toArray()) }}</p>@endif--}}
                                         @if(\App\RoleMeta::where('role_id', '=', $role->id)->first() != null)<p class="card-text">{{ \App\RoleMeta::where('role_id', '=', $role->id)->first()->description }}</p>@endif
                                         <a href="{{ route('role.show', $role->id) }}" class="card-link badge-pill badge-primary" data-toggle="tooltip" title="Show Role: {{ $role->name }}">[Show]</a>
+                                        <a href="{{ route('role.edit', $role->id) }}" class="card-link badge-pill badge-warning" data-toggle="tooltip" title="Edit Role: {{ $role->name }}">[Edit]</a>
                                     </div>
                                 </div>
                             @endforeach
