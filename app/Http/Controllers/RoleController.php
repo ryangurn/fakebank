@@ -16,7 +16,7 @@ use Spatie\Permission\Models\Role;
 class RoleController extends Controller
 {
     public $validator = [
-        'name' => 'required|unique:roles,name',
+        'name' => 'required',
         'description' => 'required|string',
         'long' => 'string|nullable',
         'permissions.*' => 'required|numeric'
@@ -24,7 +24,6 @@ class RoleController extends Controller
 
     public $messages = [
         'name.required' => 'A role name is required',
-        'name.unique' => 'A role already exists with that name',
         'description.required' => 'A role description is required',
         'description.string' => 'A role description must be a string',
         'long.string' => 'A long description must be a string',
@@ -74,6 +73,11 @@ class RoleController extends Controller
             return back()->withErrors(['Please assign a set of permissions to assign']);
         }
 
+        $rolesNames = Role::all()->first()->pluck('name')->toArray();
+        if( in_array($request->get('name'), $rolesNames) ) {
+            return back()->withErrors(['Please choose a new name for this role']);
+        }
+
         try {
             $role = Role::create([
                 'name' => $request->get('name')
@@ -105,5 +109,72 @@ class RoleController extends Controller
     public function show(Role $role)
     {
         return view('role.show', compact('role'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param Role $role
+     * @return Application|Factory|View
+     */
+    public function edit(Role $role)
+    {
+        $permissions = Permission::all();
+        $variables = ['form' => ['action' => route('role.update', $role->id), 'method' => 'POST', 'hidden' => 'PUT']];
+        return view('role.update', compact('role', 'variables', 'permissions'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Role $role
+     * @return RedirectResponse
+     */
+    public function update(Request $request, Role $role): RedirectResponse
+    {
+        $validator = validator($request->all(), $this->validator, $this->messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        if (count($request->get('permissions')) == 0 || $request->get('permissions') == null) {
+            return back()->withErrors(['Please assign a set of permissions to assign']);
+        }
+
+        $rolesNames = Role::where('id', '!=', $role->id)->get()->pluck('name')->toArray();
+        if( in_array($request->get('name'), $rolesNames) ) {
+            return back()->withErrors(['Please choose a new name for this role']);
+        }
+
+        $role = Role::where('id', '=', $role->id)->first();
+        $role->name = $request->get('name');
+        $role->save();
+
+        $ps = [];
+        foreach ($request->get('permissions') as $permission) {
+            $ps[] = Permission::where('id', '=', $permission)->first();
+        }
+        $role->syncPermissions($ps);
+
+        $meta = RoleMeta::where('role_id', '=', $role->id)->first();
+        $meta->description = $request->get('description');
+        $meta->long = $request->get('long');
+        $meta->save();
+
+        return redirect()->route('role.index')->with('success', 'Role updated');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy(Role $role)
+    {
+        $role->delete();
+        return redirect()->route('role.index')->with('success', 'Role deleted');
     }
 }

@@ -63,6 +63,10 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::get('/', 'RoleController@index')->name('role.index');
                 Route::get('/create', 'RoleController@create')->name('role.create');
                 Route::post('/', 'RoleController@store')->name('role.store');
+                Route::get('/{role}', 'RoleController@show')->name('role.show');
+                Route::get('/edit/{role}', 'RoleController@edit')->name('role.edit');
+                Route::put('/{role}', 'RoleController@update')->name('role.update');
+                Route::delete('/{role}', 'RoleController@destroy')->name('role.destroy');
             });
 
             Route::group(['prefix' => 'log'], function() {
