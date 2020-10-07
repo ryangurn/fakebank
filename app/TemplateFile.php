@@ -51,8 +51,6 @@ class TemplateFile extends Model
                 return "Partial";
             case 2:
                 return "Modal";
-            default:
-                return;
         }
     }
 
