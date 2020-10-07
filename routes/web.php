@@ -59,6 +59,12 @@ Route::domain('admin.fakebank.test')->group(function(){
                 Route::get('/{permission}', 'PermissionController@show')->name('permission.show');
             });
 
+            Route::group(['prefix' => 'role'], function () {
+                Route::get('/', 'RoleController@index')->name('role.index');
+                Route::get('/create', 'RoleController@create')->name('role.create');
+                Route::post('/', 'RoleController@store')->name('role.store');
+            });
+
             Route::group(['prefix' => 'log'], function() {
                 Route::get('/', 'LogController@index')->name('log.index');
             });
