@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Models\Permission;
 
 /**
@@ -11,6 +12,17 @@ use Spatie\Permission\Models\Permission;
  */
 class PermissionMeta extends Model
 {
+    use LogsActivity;
+
+    /**
+     * @var bool
+     */
+    protected static $logFillable = true;
+    /**
+     * @var string
+     */
+    protected static $logName = 'permission metadata';
+
     /**
      * @var string
      */
