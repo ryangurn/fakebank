@@ -96,4 +96,15 @@ class RoleController extends Controller
         return redirect()->route('role.index')->with('success', 'Role created');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param Role $role
+     * @return void
+     */
+    public function show(Role $role)
+    {
+
+        return view('role.show', compact('role'));
+    }
 }
