@@ -67,7 +67,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('template.index') }}">Templates</a>
+                                    <a class="dropdown-item" href="{{ route('template.index') }}">Templates <span class="float-right"><span class="badge badge-pill badge-dark">{{ $templates->count() }}</span></span></a>
 
                                     @if(isset($templates) && !$templates->isEmpty())
                                     <div class="dropdown-divider"></div>
@@ -84,9 +84,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('bank.index')  }}">Banks</a>
-                                    <a class="dropdown-item" href="{{ route('account.index')  }}">Accounts</a>
-                                    <a class="dropdown-item" href="{{ route('transaction.index')  }}">Transactions</a>
+                                    <a class="dropdown-item" href="{{ route('bank.index')  }}">Banks <span class="float-right"><span class="badge badge-pill badge-primary">{{ $bankCount }}</span></span></a>
+                                    <a class="dropdown-item" href="{{ route('account.index')  }}">Accounts <span class="float-right"><span class="badge badge-pill badge-secondary">{{ $accountCount }}</span></span></a>
+                                    <a class="dropdown-item" href="{{ route('transaction.index')  }}">Transactions <span class="float-right"><span class="badge badge-pill badge-warning">{{ $transactionCount }}</span></span></a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -98,6 +98,7 @@
                                     <a class="dropdown-item" href="{{ route('log.index') }}">Logs</a>
                                     <a class="dropdown-item" href="{{ route('user.index') }}">Users</a>
                                     <a class="dropdown-item" href="{{ route('permission.index') }}">Permissions</a>
+                                    <a class="dropdown-item" href="{{ route('role.index') }}">Roles</a>
                                 </div>
                             </li>
 
