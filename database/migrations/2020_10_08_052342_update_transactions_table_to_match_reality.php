@@ -15,14 +15,14 @@ class UpdateTransactionsTableToMatchReality extends Migration
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->string('iso_currency_code')->after('amount');
-            $table->timestamp('authorization_date')->nullable();
-            $table->timestamp('completion_date')->nullable();
-            $table->longText('location');
-            $table->string('name');
-            $table->string('merchant_name');
-            $table->longText('payment_meta');
-            $table->string('payment_channel');
-            $table->boolean('pending')->default(true);
+            $table->timestamp('authorization_date')->nullable()->after('iso_currency_code');
+            $table->timestamp('completion_date')->nullable()->after('authorization_date');
+            $table->longText('location')->after('completion_date');
+            $table->string('name')->after('location');
+            $table->string('merchant_name')->after('name');
+            $table->longText('payment_meta')->after('merchant_name');
+            $table->string('payment_channel')->after('payment_meta');
+            $table->boolean('pending')->default(true)->after('payment_channel');
         });
     }
 
