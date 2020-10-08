@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "spatie/laravel-activitylog": "^3.16",
-        "spatie/laravel-permission": "^3.17"
+        "spatie/laravel-permission": "^3.17",
+      "ext-intl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
