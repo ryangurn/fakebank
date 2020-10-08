@@ -19,6 +19,11 @@
                                 <div class="col-md-2"><span class="badge badge-primary">Caption</span></div>
                                 <div class="col-md-10">{{ $bank->caption }}</div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-2"><span class="badge badge-dark">Routing Numbers</span></div>
+                                <div class="col-md-10"><pre>{{ $bank->numbers  }}</pre></div>
+                            </div>
+                            <br />
                             @if($bank->settings != null)
                             <div class="row">
                                 <div class="col-md-2"><span class="badge badge-danger">Settings</span></div>

@@ -12,6 +12,10 @@
         <label for="caption">Bank Caption</label>
         <input type="text" id="caption" name="caption" class="form-control" placeholder="Bank Caption" @if(isset($bank) && $bank->caption != null) value="{{ $bank->caption  }}" @endif />
     </div>
+    <div class="form-group">
+        <label for="numbers">Routing Numbers</label>
+        <textarea name="numbers" class="form-control" placeholder="Routing numbers must be in JSON form.">@if(isset($bank) && $bank->numbers != null){{ $bank->numbers  }}@endif</textarea>
+    </div>
 
     <div class="form-group">
         <label for="name">Trolls</label>

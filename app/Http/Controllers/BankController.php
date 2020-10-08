@@ -14,7 +14,8 @@ class BankController extends Controller
     protected $validator = [
         'name' => 'required|min:2|max:255|string',
         'caption' => 'required|min:2|max:255|string',
-        'trolls' => 'nullable|json'
+        'trolls' => 'nullable|json',
+        'numbers' => 'required|json',
     ];
 
     protected $messages = [
@@ -27,7 +28,9 @@ class BankController extends Controller
         'caption.max' => 'A bank\'s caption must be less than 255 characters',
         'caption.string' => 'Why are you sending the wrong data type for the caption? This must be a string!',
         'trolls.nullable' => 'The trolls field must be nullable or a json object.',
-        'trolls.json' => 'The trolls field must be a valid json object.'
+        'trolls.json' => 'The trolls field must be a valid json object.',
+        'numbers.required' => 'You must provide routing numbers',
+        'numbers.json' => 'Routing numbers must be in json form',
     ];
 
     public function __construct()
@@ -84,6 +87,7 @@ class BankController extends Controller
             'name' => $request->get('name'),
             'caption' => $request->get('caption'),
             'trolls' => $request->get('trolls'),
+            'numbers' => $request->get('numbers'),
             'settings' => $settings
         ]);
 
@@ -135,6 +139,7 @@ class BankController extends Controller
         $bank->name = $request->get('name');
         $bank->caption = $request->get('caption');
         $bank->trolls = $request->get('trolls');
+        $bank->numbers = $request->get('numbers');
         $bank->save();
 
         return redirect()->route('bank.show', $bank->id)->with('success', 'Bank Updated!');
