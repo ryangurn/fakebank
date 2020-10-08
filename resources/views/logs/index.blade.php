@@ -27,6 +27,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-10">
+                {{ $logs->useBootstrap()  }}
                 {{ $logs->links()  }}
 
                 @if(isset($logs) && !$logs->isEmpty())
