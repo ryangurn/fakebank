@@ -36,17 +36,24 @@ class Account extends Model
      */
     protected $fillable = [
         'bank_id',
+        'name',
+        'official_name',
         'type',
+        'paperless',
         'number',
-        'balance',
-        'settings',
+        'routing_numbers',
+        'interest',
+        'balances',
+        'settings'
     ];
 
     /**
      * @var string[]
      */
     protected $casts = [
-        'settings' => 'array'
+        'settings' => 'array',
+        'routing_numbers' => 'array',
+        'balances' => 'array'
     ];
 
     /**

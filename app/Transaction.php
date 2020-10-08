@@ -36,6 +36,15 @@ class Transaction extends Model
         'account_id',
         'description',
         'amount',
+        'iso_currency_code',
+        'authorization_date',
+        'completion_date',
+        'location',
+        'name',
+        'merchant_name',
+        'payment_meta',
+        'payment_channel',
+        'pending',
         'time'
     ];
 
@@ -43,7 +52,11 @@ class Transaction extends Model
      * @var string[]
      */
     protected $casts = [
-        'time' => 'timestamp'
+        'authorization_date' => 'timestamp',
+        'completion_date' => 'timestamp',
+        'location' => 'array',
+        'payment_meta' => 'array',
+        'pending' => 'boolean'
     ];
 
     /**

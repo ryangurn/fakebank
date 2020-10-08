@@ -38,6 +38,7 @@ class Bank extends Model
     protected $fillable = [
         'name',
         'caption',
+        'numbers',
         'trolls',
         'settings'
     ];
@@ -48,6 +49,7 @@ class Bank extends Model
      * @var array
      */
     protected $casts = [
+        'numbers' => 'array',
         'trolls' => 'array',
         'settings' => 'array'
     ];
