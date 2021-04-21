@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Bank;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class PublicServiceProvider extends ServiceProvider
@@ -24,21 +25,24 @@ class PublicServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $bank = Bank::where('settings->status', '=', 'true')->first();
-        if ($bank == null) return;
+        if (Schema::hasTable('banks'))
+        {
+            $bank = Bank::where('settings->status', '=', 'true')->first();
+            if ($bank == null) return;
 
-        view()->composer('public.index', function($view) use ($bank){
-            $view->with('activeBank', $bank);
-        });
+            view()->composer('public.index', function($view) use ($bank){
+                $view->with('activeBank', $bank);
+            });
 
-        foreach ($bank->template->routes as $route) {
-            if (isset($route->file) && $route->file != null) {
-                $view = explode(".", $route->file->storage);
-                view()->composer('public.' . $route->template->resource . '.' . strtolower($route->file->type) . 's.' . $view[0], function ($view) use ($bank) {
-                    foreach ($bank->template->variables as $variable) {
-                        $view->with($variable->variable, $variable->value);
-                    }
-                });
+            foreach ($bank->template->routes as $route) {
+                if (isset($route->file) && $route->file != null) {
+                    $view = explode(".", $route->file->storage);
+                    view()->composer('public.' . $route->template->resource . '.' . strtolower($route->file->type) . 's.' . $view[0], function ($view) use ($bank) {
+                        foreach ($bank->template->variables as $variable) {
+                            $view->with($variable->variable, $variable->value);
+                        }
+                    });
+                }
             }
         }
     }

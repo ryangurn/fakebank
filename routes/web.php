@@ -12,6 +12,7 @@
 */
 
 use App\Bank;
+use Illuminate\Support\Facades\Schema;
 
 Route::domain('fakebank.test')->group(function(){
     Route::get('/', function () {
@@ -19,17 +20,20 @@ Route::domain('fakebank.test')->group(function(){
     })->name('root');
 
     # get template routes
-    $bank = Bank::where('settings->status', '=', 'true')->first();
-    if($bank != null) {
-        $template = $bank->template;
-        if ($template != null) {
-            $routes = $template->routes;
+    if (Schema::hasTable('banks'))
+    {
+        $bank = Bank::where('settings->status', '=', 'true')->first();
+        if($bank != null) {
+            $template = $bank->template;
+            if ($template != null) {
+                $routes = $template->routes;
 
-            foreach ($routes as $route) {
-                Route::get($route->route, function () use ($route) {
-                    $view = explode(".", $route->file->storage);
-                    return view('public.' . $route->template->resource . '.' . strtolower($route->file->type) . 's.' . $view[0]);
-                });
+                foreach ($routes as $route) {
+                    Route::get($route->route, function () use ($route) {
+                        $view = explode(".", $route->file->storage);
+                        return view('public.' . $route->template->resource . '.' . strtolower($route->file->type) . 's.' . $view[0]);
+                    });
+                }
             }
         }
     }
